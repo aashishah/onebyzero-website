@@ -701,7 +701,7 @@ h1, h2, h3, h4, h5, h6 {
 
 @media (max-width: 768px) {
     .hero-section{
-    height: 50vh !important;
+    height: 60vh !important;
     
         .hero-sub-heading{
         width: 40vw !important;
@@ -745,6 +745,10 @@ h1, h2, h3, h4, h5, h6 {
         }
     }
 
+    .footer-inside{
+        padding: 14px 24px !important;
+    }
+
     .left-side{
         .text{
             font-size: 9px !important;
@@ -753,6 +757,15 @@ h1, h2, h3, h4, h5, h6 {
 
         .bottom{
             margin-top: 10px !important;
+            font-size: 7px !important;
         }
     }
+
+    .right-side {
+        .logo{
+        img{
+            width: 100% !important;
+        }
+    }
+}
 }
