@@ -30,20 +30,10 @@ const scrollFade = () => {
 
     const elementFourth = rect.height/4;
     const fadeInPoint = window.innerHeight - elementFourth;
-    const fadeOutPoint = -(rect.height/2);
 
     if (rect.top <= fadeInPoint) {
-      element.classList.add('scrollFade--visible');
       element.classList.add('scrollFade--animate');
-      element.classList.remove('scrollFade--hidden');
-    } else {
-      element.classList.remove('scrollFade--visible');
-      element.classList.add('scrollFade--hidden');
-    }
-
-    if (rect.top <= fadeOutPoint) {
-      element.classList.remove('scrollFade--visible');
-      element.classList.add('scrollFade--hidden');
+      element.style.opacity = 1;
     }
   }
 }
@@ -53,6 +43,8 @@ window.addEventListener('resize', scrollFade);
 document.addEventListener('DOMContentLoaded', () => {
   scrollFade();
 });
+
+
 document.getElementById('contactForm').addEventListener('submit', function(event) {
   event.preventDefault();
   let isValid = true;
