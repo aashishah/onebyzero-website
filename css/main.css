@@ -34,6 +34,11 @@ body{
     min-height: 100vh;
     position: relative;
 
+a {
+    color: #FFF;;
+    text-decoration: none !important;
+}
+
 .hero-section{
     height: 100vh;
     padding: 20px 2em;
