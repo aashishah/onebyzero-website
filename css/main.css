@@ -1139,7 +1139,6 @@ h3 {
 .social img {
   width: 20px;
   height: 20px;
-  filter: brightness(0) invert(1);
 }
 
 .footer__bottom {

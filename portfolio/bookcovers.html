@@ -1,0 +1,669 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, viewport-fit=cover"
+    />
+    <title>Book Covers — OneByZero Studios</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Playfair+Display:ital,wght@1,500&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      :root {
+        color-scheme: dark;
+        --bg: #05040a;
+        --fg: #f4f2fb;
+        --mute: #a9a6b8;
+        --g1: #7b6cff;
+        --g2: #7fd3e0;
+        --glow: #5b34d6;
+        box-sizing: border-box;
+        padding-top: env(safe-area-inset-top, 0px);
+        padding-bottom: env(safe-area-inset-bottom, 0px);
+      }
+      *,
+      *:before,
+      *:after {
+        box-sizing: inherit;
+      }
+      html,
+      body {
+        height: 100%;
+        margin: 0;
+        overflow: hidden;
+        background: var(--bg);
+        color: var(--fg);
+        font-family: Inter, system-ui, sans-serif;
+      }
+      .glow {
+        position: fixed;
+        inset: 0;
+        pointer-events: none;
+        background:
+          radial-gradient(40vw 40vw at 80% 10%, var(--glow), transparent 70%),
+          radial-gradient(
+            35vw 35vw at 85% 100%,
+            rgba(70, 140, 140, 0.55),
+            transparent 70%
+          );
+        opacity: 0.7;
+        transition: background 1s;
+      }
+      .glow:after {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background: radial-gradient(
+          260px 260px at var(--mx, 50%) var(--my, 50%),
+          rgba(123, 108, 255, 0.18),
+          transparent 70%
+        );
+      }
+      header {
+        position: fixed;
+        top: env(safe-area-inset-top, 0px);
+        left: 0;
+        right: 0;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 26px 44px;
+        z-index: 5;
+      }
+      .logo {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        font-size: 10px;
+        letter-spacing: 0.5em;
+        color: #fff;
+        text-decoration: none;
+        text-transform: uppercase;
+      }
+      .logo i {
+        width: 30px;
+        height: 38px;
+        border: 1.5px solid #fff;
+        position: relative;
+      }
+      .logo i:after {
+        content: "";
+        position: absolute;
+        left: 50%;
+        top: -4px;
+        bottom: -4px;
+        border-left: 1.5px solid #fff;
+        transform: skewX(-18deg);
+      }
+      .pill {
+        padding: 12px 24px;
+        border-radius: 99px;
+        background: linear-gradient(90deg, var(--g1), var(--g2));
+        color: #0a0816;
+        font-weight: 500;
+        font-size: 15px;
+        text-decoration: none;
+      }
+      #track {
+        position: absolute;
+        inset: 0;
+        display: flex;
+        align-items: center;
+        gap: 56px;
+        padding: 0 20vw 0 14vw;
+        overflow-x: auto;
+        overflow-y: hidden;
+        scrollbar-width: none;
+        cursor: grab;
+        touch-action: pan-x;
+      }
+      #track::-webkit-scrollbar {
+        display: none;
+      }
+      #track.drag {
+        cursor: grabbing;
+      }
+      .card {
+        flex: none;
+        perspective: 900px;
+        transition:
+          opacity 0.4s,
+          filter 0.4s,
+          transform 0.5s;
+      }
+      .card:nth-child(odd) {
+        transform: translateY(-7vh);
+      }
+      .card:nth-child(even) {
+        transform: translateY(8vh) scale(0.88);
+      }
+      .card:nth-child(3n) {
+        --s: 1.1;
+      }
+      #track:hover .card {
+        opacity: 0.45;
+        filter: blur(1px);
+      }
+      #track .card:hover {
+        opacity: 1;
+        filter: none;
+      }
+      .cover {
+        position: relative;
+        width: min(250px, 56vw);
+        aspect-ratio: 2/3;
+        border-radius: 4px 10px 10px 4px;
+        overflow: hidden;
+        box-shadow:
+          0 30px 60px -20px rgba(0, 0, 0, 0.8),
+          inset 6px 0 8px -4px rgba(255, 255, 255, 0.25);
+        transition:
+          transform 0.15s ease-out,
+          box-shadow 0.3s;
+        transform-style: preserve-3d;
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-end;
+        padding: 7% 8%;
+        user-select: none;
+      }
+      .card:hover .cover {
+        box-shadow:
+          0 40px 80px -20px var(--c, #000),
+          inset 6px 0 8px -4px rgba(255, 255, 255, 0.25);
+      }
+      .cover .t {
+        position: relative;
+        z-index: 2;
+        font-weight: 600;
+        line-height: 1.02;
+        font-size: clamp(22px, 2.1vw, 31px);
+        letter-spacing: -0.02em;
+      }
+      .cover .a {
+        position: relative;
+        z-index: 2;
+        font-size: 10px;
+        letter-spacing: 0.3em;
+        text-transform: uppercase;
+        margin-top: 10px;
+        opacity: 0.8;
+      }
+      .art {
+        position: absolute;
+        inset: 0;
+        z-index: 1;
+      }
+      .serif .t {
+        font-family: "Playfair Display", serif;
+        font-style: italic;
+        font-weight: 500;
+      }
+      /* designs */
+      .v1 {
+        background: linear-gradient(#0b2a33, #041014);
+      }
+      .v1 .art {
+        background:
+          radial-gradient(circle at 50% 38%, #ffd9a0 0 12%, transparent 13%),
+          repeating-linear-gradient(
+            0deg,
+            transparent 0 9px,
+            rgba(127, 211, 224, 0.18) 9px 10px
+          );
+        -webkit-mask: linear-gradient(#000 60%, transparent);
+        mask: linear-gradient(#000 60%, transparent);
+      }
+      .v2 {
+        background: linear-gradient(160deg, #5a0f2e, #1c0510);
+        color: #ffd6e2;
+      }
+      .v2 .art {
+        background:
+          radial-gradient(ellipse at 30% 25%, #ff5a8a88, transparent 55%),
+          radial-gradient(ellipse at 80% 60%, #ffb36b55, transparent 50%);
+      }
+      .v3 {
+        background: #05060f;
+      }
+      .v3 .art {
+        background: repeating-radial-gradient(
+          circle at 50% 35%,
+          transparent 0 14px,
+          rgba(123, 108, 255, 0.55) 15px 16px
+        );
+        -webkit-mask: radial-gradient(
+          circle at 50% 35%,
+          #000 20%,
+          transparent 70%
+        );
+        mask: radial-gradient(circle at 50% 35%, #000 20%, transparent 70%);
+      }
+      .v4 {
+        background: #ece6da;
+        color: #1a1713;
+      }
+      .v4 .art {
+        background:
+          linear-gradient(#1a1713, #1a1713) 12% 14%/34% 3px no-repeat,
+          linear-gradient(#c4552d, #c4552d) 12% 22%/42% 32% no-repeat;
+      }
+      .v5 {
+        background: linear-gradient(#150a05, #000);
+        color: #ffb25a;
+      }
+      .v5 .art {
+        background: conic-gradient(
+          from 210deg at 50% 38%,
+          transparent 0 120deg,
+          #ff7a1a 120deg 240deg,
+          transparent 240deg
+        );
+        -webkit-mask: linear-gradient(#000 55%, transparent);
+        mask: linear-gradient(#000 55%, transparent);
+        clip-path: polygon(50% 12%, 82% 62%, 18% 62%);
+      }
+      .v6 {
+        background: #0e3a8a;
+      }
+      .v6 .art {
+        background: repeating-linear-gradient(
+          100deg,
+          transparent 0 22px,
+          rgba(255, 255, 255, 0.14) 22px 44px
+        );
+      }
+      .v7 {
+        background: #1b1410;
+        color: #e6c27a;
+        border: 1px solid #e6c27a;
+        outline: 6px solid #1b1410;
+        outline-offset: -14px;
+      }
+      .v7 .art {
+        background: radial-gradient(
+          circle at 50% 32%,
+          transparent 0 22%,
+          #e6c27a 22.5% 23.5%,
+          transparent 24% 33%,
+          #e6c27a55 33.5% 34%,
+          transparent 34.5%
+        );
+      }
+      .v8 {
+        background: linear-gradient(135deg, #7b6cff, #ff5fa2 55%, #ffd36b);
+      }
+      .v8 .art {
+        background: radial-gradient(
+          circle at 70% 25%,
+          #fff8 0,
+          transparent 40%
+        );
+      }
+      .v8 .t,
+      .v8 .a {
+        color: #12051f;
+      }
+      .v9 {
+        background: #e8ff5a;
+        color: #0b0b0b;
+      }
+      .v9 .art {
+        background:
+          radial-gradient(circle at 50% 30%, #0b0b0b 0 16%, transparent 16.5%),
+          radial-gradient(circle at 80% 70%, #0b0b0b 0 6%, transparent 6.5%);
+      }
+      .label {
+        position: fixed;
+        left: 44px;
+        bottom: calc(36px + env(safe-area-inset-bottom, 0px));
+        z-index: 5;
+        pointer-events: none;
+      }
+      .label h1 {
+        margin: 0;
+        font-size: clamp(30px, 4vw, 54px);
+        font-weight: 500;
+        letter-spacing: -0.03em;
+        line-height: 1;
+      }
+      .label h1 em {
+        font-family: "Playfair Display", serif;
+        font-weight: 500;
+        background: linear-gradient(90deg, var(--g1), var(--g2));
+        -webkit-background-clip: text;
+        background-clip: text;
+        color: transparent;
+        padding-right: 0.1em;
+      }
+      .label p {
+        margin: 10px 0 0;
+        color: var(--mute);
+        font-size: 14px;
+      }
+      .prog {
+        position: fixed;
+        right: 44px;
+        bottom: calc(44px + env(safe-area-inset-bottom, 0px));
+        width: 140px;
+        z-index: 5;
+        font-size: 12px;
+        color: var(--mute);
+        text-align: right;
+        pointer-events: none;
+      }
+      .prog div {
+        height: 2px;
+        background: #ffffff22;
+        margin-top: 8px;
+        border-radius: 2px;
+      }
+      .prog b {
+        display: block;
+        height: 100%;
+        width: 0;
+        background: linear-gradient(90deg, var(--g1), var(--g2));
+        border-radius: 2px;
+      }
+      #view {
+        position: fixed;
+        inset: 0;
+        z-index: 10;
+        display: none;
+        align-items: center;
+        justify-content: center;
+        gap: 64px;
+        padding: 24px;
+        background: rgba(5, 4, 10, 0.88);
+        backdrop-filter: blur(14px);
+        flex-wrap: wrap;
+      }
+      #view.on {
+        display: flex;
+        animation: in 0.4s;
+      }
+      @keyframes in {
+        from {
+          opacity: 0;
+        }
+      }
+      #view .cover {
+        width: min(330px, 70vw);
+        transform: none !important;
+      }
+      #view .info {
+        max-width: 340px;
+      }
+      #view small {
+        color: var(--g2);
+        letter-spacing: 0.3em;
+        text-transform: uppercase;
+        font-size: 11px;
+      }
+      #view h2 {
+        font-family: "Playfair Display", serif;
+        font-style: italic;
+        font-weight: 500;
+        font-size: 44px;
+        margin: 10px 0;
+        line-height: 1.05;
+      }
+      #view p {
+        color: var(--mute);
+        line-height: 1.6;
+      }
+      #view button {
+        background: none;
+        border: 1px solid #ffffff33;
+        color: var(--fg);
+        border-radius: 99px;
+        padding: 10px 18px;
+        margin: 8px 8px 0 0;
+        font: inherit;
+        font-size: 14px;
+        cursor: pointer;
+      }
+      #view button:hover {
+        border-color: var(--g1);
+      }
+      @media (max-width: 700px) {
+        header {
+          padding: 18px 20px;
+        }
+        .label {
+          left: 20px;
+        }
+        .prog {
+          right: 20px;
+          width: 90px;
+        }
+        .pill {
+          padding: 10px 16px;
+          font-size: 13px;
+        }
+        #view {
+          gap: 20px;
+        }
+        #view h2 {
+          font-size: 32px;
+        }
+      }
+    </style>
+    <link rel="stylesheet" href="../css/main.css" />
+  </head>
+  <body>
+    <div class="glow" id="glow"></div>
+    <header>
+      <a class="logo" href="#"
+        ><i></i><span>OneByZero<br />Studios</span></a
+      >
+      <a class="pill" href="#">Start a project</a>
+    </header>
+
+    <div id="track"></div>
+    <div class="label">
+      <h1>Book <em>Covers</em></h1>
+      <p>Drag, scroll or tap a cover</p>
+    </div>
+    <div class="prog">
+      <span id="count">01 / 09</span>
+      <div><b id="bar"></b></div>
+    </div>
+    <div id="view">
+      <div id="vcover"></div>
+      <div class="info">
+        <small id="vg"></small>
+        <h2 id="vt"></h2>
+        <p id="vd"></p>
+        <button id="prev">← Prev</button><button id="next">Next →</button
+        ><button id="close">Close</button>
+      </div>
+    </div>
+    <script>
+      const B = [
+        [
+          "The Last Lighthouse",
+          "Mara Voss",
+          "Thriller",
+          "v1",
+          "#2fb5c8",
+          "A coastal mystery. Cold teal gradients and a single warm sun keep the dread quiet and the eye moving upward.",
+        ],
+        [
+          "Velvet & Thorn",
+          "Elise Marlowe",
+          "Romance",
+          "v2 serif",
+          "#ff5a8a",
+          "Lush rose tones and italic serif type for a slow-burn romance with a sharp edge.",
+        ],
+        [
+          "Orbit Zero",
+          "J. K. Adeyemi",
+          "Sci-Fi",
+          "v3",
+          "#7b6cff",
+          "Concentric rings pulse out from a distant signal. Minimal, glowing, and built to read at thumbnail size.",
+        ],
+        [
+          "Quiet Rooms",
+          "Anna Lindqvist",
+          "Literary Fiction",
+          "v4",
+          "#c4552d",
+          "Restraint as a design choice: a single block of colour and a lot of paper.",
+        ],
+        [
+          "Ember Crown",
+          "R. T. Hallow",
+          "Fantasy",
+          "v5",
+          "#ff7a1a",
+          "A fractured crown in firelight, set against near-black for series-ready drama.",
+        ],
+        [
+          "Salt Season",
+          "Theo Brandt",
+          "Memoir",
+          "v6",
+          "#2d6be0",
+          "Sun-bleached stripes of an ocean-side summer, with confident, tight typography.",
+        ],
+        [
+          "The Cartographer's Daughter",
+          "Isolde Hart",
+          "Historical",
+          "v7 serif",
+          "#e6c27a",
+          "Gilt linework and a framed compass motif for an epic spanning three continents.",
+        ],
+        [
+          "Static Bloom",
+          "Nova Kline",
+          "Young Adult",
+          "v8",
+          "#ff5fa2",
+          "Loud gradients and a soft light flare that stand out on a crowded shelf.",
+        ],
+        [
+          "Hard Reset",
+          "Dev Malhotra",
+          "Non-Fiction",
+          "v9",
+          "#e8ff5a",
+          "Acid yellow and bold geometry for a business book that doesn't whisper.",
+        ],
+      ];
+      const $ = (s) => document.querySelector(s),
+        T = $("#track"),
+        V = $("#view");
+      const mk = (b) =>
+        `<div class="cover ${b[3]}" style="--c:${b[4]}66"><i class="art"></i><span class="t">${b[0]}</span><span class="a">${b[1]}</span></div>`;
+      T.innerHTML = B.map(
+        (b, i) => `<div class="card" data-i="${i}">${mk(b)}</div>`,
+      ).join("");
+      const pad = (n) => String(n + 1).padStart(2, "0");
+      // cursor glow + hover colour
+      addEventListener("pointermove", (e) => {
+        const g = $("#glow").style;
+        g.setProperty("--mx", e.clientX + "px");
+        g.setProperty("--my", e.clientY + "px");
+      });
+      T.querySelectorAll(".card").forEach((c) => {
+        const cv = c.firstChild,
+          b = B[c.dataset.i];
+        c.onpointermove = (e) => {
+          if (e.pointerType === "touch") return;
+          const r = c.getBoundingClientRect(),
+            x = (e.clientX - r.left) / r.width - 0.5,
+            y = (e.clientY - r.top) / r.height - 0.5;
+          cv.style.transform = `rotateY(${x * 22}deg) rotateX(${-y * 18}deg) scale(1.06)`;
+        };
+        c.onpointerenter = () =>
+          $("#glow").style.setProperty("--glow", b[4] + "aa");
+        c.onpointerleave = () => {
+          cv.style.transform = "";
+          $("#glow").style.setProperty("--glow", "#5b34d6");
+        };
+      });
+      // wheel -> horizontal, drag to scroll
+      T.addEventListener(
+        "wheel",
+        (e) => {
+          if (Math.abs(e.deltaY) > Math.abs(e.deltaX)) {
+            e.preventDefault();
+            T.scrollLeft += e.deltaY * 1.2;
+          }
+        },
+        { passive: false },
+      );
+      let down = false,
+        sx = 0,
+        sl = 0,
+        moved = 0;
+      T.addEventListener("pointerdown", (e) => {
+        if (e.pointerType === "touch") return;
+        down = true;
+        moved = 0;
+        sx = e.clientX;
+        sl = T.scrollLeft;
+      });
+      addEventListener("pointermove", (e) => {
+        if (!down) return;
+        const d = e.clientX - sx;
+        moved = Math.max(moved, Math.abs(d));
+        if (moved > 5) T.classList.add("drag");
+        T.scrollLeft = sl - d;
+      });
+      addEventListener("pointerup", () => {
+        down = false;
+        T.classList.remove("drag");
+      });
+      // progress
+      const upd = () => {
+        const m = T.scrollWidth - T.clientWidth,
+          p = m ? T.scrollLeft / m : 0;
+        $("#bar").style.width = p * 100 + "%";
+        $("#count").textContent =
+          pad(Math.round(p * (B.length - 1))) + " / " + pad(B.length - 1);
+      };
+      T.addEventListener("scroll", upd);
+      upd();
+      // viewer
+      let cur = 0;
+      const show = (i) => {
+        cur = (i + B.length) % B.length;
+        const b = B[cur];
+        $("#vcover").innerHTML = mk(b);
+        $("#vg").textContent = b[2] + " · " + pad(cur);
+        $("#vt").textContent = b[0];
+        $("#vd").textContent =
+          b[5] + " Cover by " + b[1] + "'s designer at OneByZero.";
+        V.classList.add("on");
+      };
+      T.addEventListener("click", (e) => {
+        const c = e.target.closest(".card");
+        if (c && moved <= 5) show(+c.dataset.i);
+      });
+      $("#close").onclick = () => V.classList.remove("on");
+      $("#prev").onclick = () => show(cur - 1);
+      $("#next").onclick = () => show(cur + 1);
+      V.addEventListener("click", (e) => {
+        if (e.target === V) V.classList.remove("on");
+      });
+      addEventListener("keydown", (e) => {
+        if (!V.classList.contains("on")) {
+          if (e.key === "ArrowRight") T.scrollLeft += 300;
+          if (e.key === "ArrowLeft") T.scrollLeft -= 300;
+          return;
+        }
+        if (e.key === "Escape") V.classList.remove("on");
+        if (e.key === "ArrowRight") show(cur + 1);
+        if (e.key === "ArrowLeft") show(cur - 1);
+      });
+    </script>
+  </body>
+</html>
