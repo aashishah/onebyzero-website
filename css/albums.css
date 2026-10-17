@@ -1,0 +1,355 @@
+/* =========================================================
+   OneByZero – Album Cover Art page
+   Builds on css/main.css (tokens, nav, buttons, hero background).
+   Sections: layout · header · showcase · fallback · dots · footer · responsive
+   ========================================================= */
+
+/* ---------- Layout ---------- */
+/* Desktop: the page is exactly one screen tall (no scroll).
+   Tablet/mobile: see the responsive block – it stacks and may scroll. */
+body.page-albums {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  height: 100svh;
+  overflow: hidden;
+}
+body.page-albums main {
+  flex: 1;
+  min-height: 0;
+}
+
+.albums {
+  position: relative;
+  display: flex;
+  align-items: center;
+  height: 100%;
+  min-height: 0;
+  padding: calc(var(--nav-h) + 0.5rem) 0 0.75rem;
+  overflow: hidden;
+  isolation: isolate;
+}
+
+/* Two columns: small text on the left, big record on the right.
+   --stage-w caps the showcase by screen HEIGHT so it never forces a scroll
+   (13.5rem = nav + dots row + footer + padding). */
+.albums__wrap {
+  --stage-w: min(100%, calc((100vh - 13.5rem) * 1.6));
+  --stage-w: min(100%, calc((100svh - 13.5rem) * 1.6));
+  display: grid;
+  grid-template-columns: minmax(15rem, 0.7fr) minmax(0, 2fr);
+  grid-template-areas:
+    "head show"
+    "head foot";
+  align-items: center;
+  column-gap: clamp(1.5rem, 4vw, 4rem);
+  width: 100%;
+}
+.albums__head {
+  grid-area: head;
+}
+.showcase {
+  grid-area: show;
+}
+.stage__foot {
+  grid-area: foot;
+}
+
+/* ---------- Header ---------- */
+.albums__head {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 1.5rem;
+}
+.albums__title {
+  margin: 0 0 0.9rem;
+  font-size: clamp(1.15rem, 1.9vw, 1.6rem);
+  font-weight: 800;
+  font-stretch: 125%;
+  line-height: 1.1;
+  letter-spacing: -0.005em;
+  text-transform: uppercase;
+}
+.albums__byline {
+  max-width: 19rem;
+  margin: 0;
+  color: rgba(255, 255, 255, 0.7);
+  font-family: var(--display);
+  font-size: 0.7rem;
+  font-weight: 600;
+  font-stretch: 110%;
+  line-height: 1.9;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+.albums__cta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.7rem;
+}
+
+/* ---------- Showcase (sleeve + record) ---------- */
+.showcase {
+  position: relative;
+  justify-self: end;
+  width: var(--stage-w);
+  aspect-ratio: 16 / 10;
+  cursor: grab;
+  touch-action: pan-y;
+  -webkit-user-select: none;
+  user-select: none;
+  border-radius: 28px;
+  outline: none;
+}
+.showcase.is-dragging {
+  cursor: grabbing;
+}
+.showcase:focus-visible {
+  outline: 2px solid var(--blue);
+  outline-offset: 6px;
+}
+
+.showcase__glow {
+  position: absolute;
+  inset: 8% 10%;
+  border-radius: 50%;
+  background: radial-gradient(
+    ellipse at 50% 50%,
+    rgba(255, 255, 255, 0.2),
+    rgba(201, 204, 211, 0.07) 45%,
+    transparent 70%
+  );
+  filter: blur(14px);
+  pointer-events: none;
+  animation: showcase-glow 7s ease-in-out infinite alternate;
+}
+@keyframes showcase-glow {
+  from {
+    opacity: 0.65;
+    transform: scale(0.96);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1.04);
+  }
+}
+
+.showcase canvas {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 1s var(--ease);
+}
+.showcase.is-ready canvas {
+  opacity: 1;
+}
+
+/* ---------- CSS fallback: sleeve with a record sliding out ---------- */
+.fallback {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  transition: opacity 0.8s;
+}
+.showcase.is-ready .fallback {
+  opacity: 0;
+}
+
+.fallback__sleeve {
+  position: absolute;
+  z-index: 2;
+  top: 50%;
+  left: 24%;
+  width: 30%;
+  aspect-ratio: 1;
+  transform: translateY(-50%) rotate(-5deg);
+  overflow: hidden;
+  border-radius: 4px;
+  background: #12090c;
+  box-shadow: 0 30px 60px -20px rgba(0, 0, 0, 0.8);
+}
+.fallback__sleeve img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.fallback__disc {
+  position: absolute;
+  z-index: 1;
+  top: 50%;
+  left: 38%;
+  width: 30%;
+  aspect-ratio: 1;
+  margin-top: -15%;
+  transform: translateY(-50%) translateY(15%);
+  border-radius: 50%;
+  background: repeating-radial-gradient(
+    circle at 50% 50%,
+    #0b0b10 0 2px,
+    #15151d 2px 3px
+  );
+  box-shadow:
+    0 30px 70px -20px rgba(255, 255, 255, 0.25),
+    inset 0 0 0 2px rgba(255, 255, 255, 0.06);
+  animation: disc-spin 6s linear infinite;
+}
+.fallback__disc::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  background: conic-gradient(
+    from 20deg,
+    transparent 0 6%,
+    rgba(220, 224, 232, 0.35) 10%,
+    transparent 15% 48%,
+    rgba(220, 224, 232, 0.25) 54%,
+    transparent 60%
+  );
+}
+.fallback__disc::after {
+  content: "";
+  position: absolute;
+  inset: 33%;
+  border-radius: 50%;
+  background: var(--label, linear-gradient(135deg, var(--violet), var(--teal)))
+    center / cover no-repeat;
+  box-shadow: 0 0 0 2px #0b0b10;
+}
+@keyframes disc-spin {
+  to {
+    rotate: 360deg;
+  }
+}
+
+/* ---------- Footer row: progress dots + hint ---------- */
+.stage__foot {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.6rem 1.5rem;
+  justify-self: end;
+  width: var(--stage-w);
+  margin-top: 0.75rem;
+  color: var(--muted);
+  font-family: var(--display);
+  font-size: 0.62rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+.dots {
+  display: flex;
+  align-items: center;
+  gap: 0.35rem;
+}
+.dots button {
+  position: relative;
+  width: 26px;
+  height: 16px;
+  padding: 0;
+  border: 0;
+  background: none;
+  cursor: pointer;
+}
+.dots button::before,
+.dots button::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 50%;
+  height: 3px;
+  margin-top: -1.5px;
+  border-radius: 2px;
+}
+.dots button::before {
+  background: rgba(255, 255, 255, 0.16);
+}
+.dots button::after {
+  background: var(--grad);
+  transform: scaleX(0);
+  transform-origin: left;
+}
+.dots button:hover::before {
+  background: rgba(255, 255, 255, 0.32);
+}
+.dots button.is-active::before {
+  background: rgba(255, 255, 255, 0.4);
+}
+.dots button.is-active::after {
+  animation: dot-fill var(--interval, 3s) linear forwards;
+}
+.dots button:focus-visible {
+  outline: 2px solid var(--blue);
+  outline-offset: 2px;
+  border-radius: 4px;
+}
+@keyframes dot-fill {
+  to {
+    transform: scaleX(1);
+  }
+}
+
+/* ---------- Footer: copyright only, bottom-left ---------- */
+.footer--slim {
+  padding: 1.25rem 0;
+}
+.footer--slim .footer__bottom {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  justify-content: flex-start;
+}
+
+/* ---------- Responsive ---------- */
+/* Below 900px there isn't room for two columns: stack them, and let the
+   page scroll if the content is taller than the screen. */
+@media (max-width: 899.98px) {
+  body.page-albums {
+    height: auto;
+    min-height: 100svh;
+    overflow: auto;
+  }
+  .albums {
+    height: auto;
+    padding-bottom: 2rem;
+  }
+  .albums__wrap {
+    grid-template-columns: minmax(0, 1fr);
+    grid-template-areas:
+      "head"
+      "show"
+      "foot";
+    row-gap: 1.25rem;
+  }
+  .showcase,
+  .stage__foot {
+    justify-self: stretch;
+    width: 100%;
+  }
+  .albums__head {
+    gap: 1.1rem;
+  }
+}
+
+@media (max-width: 640px) {
+  .showcase {
+    aspect-ratio: 4 / 3.2;
+  }
+  .albums__cta {
+    width: 100%;
+  }
+  .albums__cta .btn-obz {
+    flex: 1;
+  }
+  .stage__foot span {
+    display: none;
+  }
+}

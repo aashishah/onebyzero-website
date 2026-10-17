@@ -2,7 +2,7 @@ var swiper = new Swiper(".mySwiper", {
   effect: "coverflow",
   grabCursor: true,
   centeredSlides: true,
-  loop:true,
+  loop: true,
   slidesPerView: "auto",
   coverflowEffect: {
     rotate: 0,
@@ -11,15 +11,13 @@ var swiper = new Swiper(".mySwiper", {
     modifier: 2.5,
     slideShadows: true,
   },
-  autoplay:{
-
+  autoplay: {
     delay: 3000,
-    disableOnInteraction:false,
-  }
-
+    disableOnInteraction: false,
+  },
 });
 
-const fadeElements = document.getElementsByClassName('scrollFade');
+const fadeElements = document.getElementsByClassName("scrollFade");
 
 const scrollFade = () => {
   const viewportBottom = window.scrollY + window.innerHeight;
@@ -28,101 +26,99 @@ const scrollFade = () => {
     const element = fadeElements[index];
     const rect = element.getBoundingClientRect();
 
-    const elementFourth = rect.height/4;
+    const elementFourth = rect.height / 4;
     const fadeInPoint = window.innerHeight - elementFourth;
 
     if (rect.top <= fadeInPoint) {
-      element.classList.add('scrollFade--animate');
+      element.classList.add("scrollFade--animate");
       element.style.opacity = 1;
     }
   }
-}
+};
 
-document.addEventListener('scroll', scrollFade);
-window.addEventListener('resize', scrollFade);
-document.addEventListener('DOMContentLoaded', () => {
+document.addEventListener("scroll", scrollFade);
+window.addEventListener("resize", scrollFade);
+document.addEventListener("DOMContentLoaded", () => {
   scrollFade();
 });
 
+document
+  .getElementById("contactForm")
+  .addEventListener("submit", function (event) {
+    event.preventDefault();
+    let isValid = true;
+    let email = document.getElementById("email");
+    let phone = document.getElementById("phone");
+    let emailError = document.getElementById("emailError");
+    let phoneError = document.getElementById("phoneError");
 
-document.getElementById('contactForm').addEventListener('submit', function(event) {
-  event.preventDefault();
-  let isValid = true;
-  let email = document.getElementById('email');
-  let phone = document.getElementById('phone');
-  let emailError = document.getElementById('emailError');
-  let phoneError = document.getElementById('phoneError');
+    email.setCustomValidity("");
+    phone.setCustomValidity("");
 
-  email.setCustomValidity('');
-  phone.setCustomValidity('');
-
-  if (!email.checkValidity()) {
-      email.setCustomValidity('Please enter a valid email address.');
+    if (!email.checkValidity()) {
+      email.setCustomValidity("Please enter a valid email address.");
       email.reportValidity();
-      emailError.style.display = 'block';
-      email.classList.add('shake');
+      emailError.style.display = "block";
+      email.classList.add("shake");
       isValid = false;
-  } else {
-      emailError.style.display = 'none';
-      email.classList.remove('shake');
-  }
+    } else {
+      emailError.style.display = "none";
+      email.classList.remove("shake");
+    }
 
-  if (!phone.checkValidity()) {
-      phoneError.style.display = 'block';
-      phone.classList.add('shake');
+    if (!phone.checkValidity()) {
+      phoneError.style.display = "block";
+      phone.classList.add("shake");
       isValid = false;
-  } else {
-      phoneError.style.display = 'none';
-      phone.classList.remove('shake');
-  }
+    } else {
+      phoneError.style.display = "none";
+      phone.classList.remove("shake");
+    }
 
-  if (isValid) {
+    if (isValid) {
       sendEmail();
-  }
-});
+    }
+  });
 
-function sendEmail(){
-    const form = document.getElementById('contactForm');
-    const result = document.getElementById('response');
+function sendEmail() {
+  const form = document.getElementById("contactForm");
+  const result = document.getElementById("response");
 
-    form.addEventListener('submit', function(e) {
-        const formData = new FormData(form);
-        e.preventDefault();
+  const object = Object.fromEntries(new FormData(form));
+  const json = JSON.stringify(object);
 
-        const object = Object.fromEntries(formData);
-        const json = JSON.stringify(object);
+  result.innerHTML = "Please wait...";
 
-        result.innerHTML = "Please wait..."
-
-        fetch('https://api.web3forms.com/submit', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                    'Accept': 'application/json'
-                },
-                body: json
-            })
-            .then(async (response) => {
-                let json = await response.json();
-                if (response.status == 200) {
-                    result.innerHTML = "We've got your message, we'll get back to you soon!";
-                    result.style.color = '#adf0ae';
-                } else {
-                    console.log(response);
-                    result.innerHTML = json.message;
-                }
-            })
-            .catch(error => {
-                console.log(error);
-                result.innerHTML = "Something went wrong! Please try again in a few minutes or directly mail our website.";
-                result.style.color = '#D34942';
-            })
-            .then(function() {
-                form.reset();
-                setTimeout(() => {
-                    result.innerHTML = "";
-                    result.style.color = "#E4DFFD";
-                }, 5000);
-            });
+  fetch("https://api.web3forms.com/submit", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+      Accept: "application/json",
+    },
+    body: json,
+  })
+    .then(async (response) => {
+      let json = await response.json();
+      if (response.status == 200) {
+        result.innerHTML =
+          "We've got your message, we'll get back to you soon!";
+        result.style.color = "#e8e9ec";
+      } else {
+        console.log(response);
+        result.innerHTML = json.message;
+      }
+    })
+    .catch((error) => {
+      console.log(error);
+      result.innerHTML =
+        "Something went wrong! Please try again in a few minutes or directly mail our website.";
+      result.style.color = "#D34942";
+    })
+    .then(function () {
+      form.reset();
+      setTimeout(() => {
+        result.innerHTML = "";
+        result.style.color = "";
+      }, 5000);
     });
 }

@@ -1,0 +1,185 @@
+<!doctype html>
+<html lang="en" data-bs-theme="dark">
+  <head>
+    <meta charset="utf-8" />
+    <title>Album Cover Art – OneByZero Studios</title>
+    <link rel="icon" href="../media/logos/titlelogo.png" type="image/png" />
+    <meta
+      name="description"
+      content="Album cover art by OneByZero Studios – custom artwork for singers, producers and labels, with over 200 releases for musicians around the world."
+    />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#050505" />
+
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH"
+      crossorigin="anonymous"
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,100..900&family=Inter:wght@300..800&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="../css/main.css" />
+    <link rel="stylesheet" href="../css/albums.css" />
+  </head>
+  <body class="page-albums">
+    <!-- ============ NAV ============ -->
+    <header class="site-header">
+      <nav class="navbar navbar-expand-lg site-nav" data-bs-theme="dark">
+        <div class="container-xl">
+          <a class="navbar-brand" href="../index.html">
+            <img
+              src="../media/logos/onebyzero_hw.png"
+              alt="OneByZero Studios"
+            />
+          </a>
+          <button
+            class="navbar-toggler"
+            type="button"
+            data-bs-toggle="collapse"
+            data-bs-target="#navbarNav"
+            aria-controls="navbarNav"
+            aria-expanded="false"
+            aria-label="Toggle navigation"
+          >
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav ms-auto align-items-lg-center">
+              <li class="nav-item">
+                <a class="nav-link" href="../index.html#home">Home</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="../index.html#recent-projects"
+                  >Recent Work</a
+                >
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="../index.html#services">Services</a>
+              </li>
+              <li class="nav-item">
+                <a
+                  class="nav-link"
+                  href="../index.html#frequently-asked-questions"
+                  >FAQ</a
+                >
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="../index.html#contact-us"
+                  >Contact Us</a
+                >
+              </li>
+            </ul>
+            <a
+              class="btn-obz btn-obz--primary btn-obz--sm ms-lg-4 mt-3 mt-lg-0"
+              href="../index.html#contact-us"
+              >Start a project</a
+            >
+          </div>
+        </div>
+      </nav>
+    </header>
+
+    <main>
+      <section class="albums" id="albums">
+        <div class="hero__bg" aria-hidden="true">
+          <span class="blob blob--1"></span>
+          <span class="blob blob--2"></span>
+          <span class="blob blob--3"></span>
+        </div>
+        <div class="hero__grain" aria-hidden="true"></div>
+
+        <div class="container-xl">
+          <div class="albums__wrap">
+            <!-- Title + byline (edit the text freely) -->
+            <header class="albums__head hero-in" style="--i: 0">
+              <div class="albums__text">
+                <h1 class="albums__title">
+                  Album <em class="serif-accent">Cover Art</em>
+                </h1>
+                <p class="albums__byline">
+                  Artwork for singers, producers and labels – made to stand out.
+                </p>
+              </div>
+              <div class="albums__cta">
+                <a
+                  class="btn-obz btn-obz--primary btn-obz--sm"
+                  href="../index.html#contact-us"
+                  >Commission a cover
+                  <span
+                    class="btn-obz__arrow sym sym--spark"
+                    aria-hidden="true"
+                  ></span
+                ></a>
+                <a
+                  class="btn-obz btn-obz--ghost btn-obz--sm"
+                  href="../index.html#recent-projects"
+                  >All work</a
+                >
+              </div>
+            </header>
+
+            <!-- Showcase: one sleeve with the record sliding out of it.
+                 The covers that rotate are listed at the top of js/album-covers.js. -->
+            <div
+              class="showcase hero-in"
+              style="--i: 1"
+              id="showcase"
+              tabindex="0"
+              role="img"
+              aria-label="An album sleeve with a vinyl record sliding out of it. The cover changes every few seconds. Drag to spin the record, click to pause."
+            >
+              <div class="showcase__glow" aria-hidden="true"></div>
+
+              <!-- CSS-only version, shown until the 3D one is ready (or if WebGL isn't available) -->
+              <div class="fallback" aria-hidden="true">
+                <div class="fallback__disc"></div>
+                <div class="fallback__sleeve">
+                  <img
+                    id="fallbackCover"
+                    src="../media/images/1.jpg"
+                    alt=""
+                    draggable="false"
+                  />
+                </div>
+              </div>
+
+              <canvas id="vinylCanvas" aria-hidden="true"></canvas>
+            </div>
+
+            <div class="stage__foot hero-in" style="--i: 2">
+              <div
+                class="dots"
+                id="dots"
+                role="group"
+                aria-label="Choose a cover"
+              ></div>
+              <span>Drag the record to spin · click to pause</span>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="footer footer--slim">
+      <div class="container-xl">
+        <div class="footer__bottom">
+          <span>© 2026 OneByZero Studios</span>
+        </div>
+      </div>
+    </footer>
+
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
+      crossorigin="anonymous"
+    ></script>
+    <script src="../js/effects.js"></script>
+    <script src="../js/album-covers.js" defer></script>
+    <script type="module" src="../js/vinyl3d.js"></script>
+  </body>
+</html>

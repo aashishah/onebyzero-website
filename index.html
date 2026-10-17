@@ -9,7 +9,7 @@
       content="OneByZero is a design studio specializing in wedding websites, invites and stationery, website design, branding, merch design, print and illustration. Transform your vision into stunning digital and print experiences."
     />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="theme-color" content="#05050a" />
+    <meta name="theme-color" content="#050505" />
     <meta property="og:title" content="OneByZero – The Design Studio" />
     <meta
       property="og:description"
@@ -35,7 +35,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-      href="https://fonts.googleapis.com/css2?family=Inter:wght@300..800&family=Playfair+Display:ital,wght@0,400..700;1,400..700&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,100..900&family=Inter:wght@300..800&display=swap"
       rel="stylesheet"
     />
     <link rel="stylesheet" href="css/main.css" />
@@ -69,9 +69,6 @@
               </li>
               <li class="nav-item">
                 <a class="nav-link" href="#services">Services</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="#weddings">Weddings</a>
               </li>
               <li class="nav-item">
                 <a class="nav-link" href="#frequently-asked-questions">FAQ</a>
@@ -127,11 +124,12 @@
 
         <div class="container-xl hero__inner">
           <div class="hero__content">
-            =
             <h1 class="hero__title">
-              <span class="line hero-in" style="--i: 1">One Challenge</span>
-              <span class="line hero-in" style="--i: 2"
-                ><em class="serif-accent">Infinite</em> Possibilities</span
+              <span class="line hero-in" style="--i: 1"
+                >One<br />Challenge</span
+              >
+              <span class="line hero-in chrome-text" style="--i: 2"
+                >Infinite Possibilities</span
               >
             </h1>
             <p class="hero__lead hero-in" style="--i: 3">
@@ -142,8 +140,11 @@
             <div class="hero__cta hero-in" style="--i: 4">
               <a class="btn-obz btn-obz--primary" href="#contact-us"
                 >Start a project
-                <span class="btn-obz__arrow" aria-hidden="true">→</span></a
-              >
+                <span
+                  class="btn-obz__arrow sym sym--spark"
+                  aria-hidden="true"
+                ></span
+              ></a>
             </div>
           </div>
         </div>
@@ -157,15 +158,15 @@
         <div class="marquee__track">
           <div class="marquee__group">
             <span>Wedding Websites</span><i>✦</i
-            ><span>Invites &amp; Stationery</span><i>✦</i><span>Album Art</span
-            ><i>✦</i><span>Book Covers</span><i>✦</i><span>Web Design</span
-            ><i>✦</i><span>Merchandise</span><i>✦</i>
+            ><span>Invites &amp; Stationery</span><i>/</i><span>Album Art</span
+            ><i>/</i><span>Book Covers</span><i>/</i><span>Web Design</span
+            ><i>/</i><span>Merchandise</span><i>/</i>
           </div>
           <div class="marquee__group">
             <span>Wedding Websites</span><i>✦</i
-            ><span>Invites &amp; Stationery</span><i>✦</i><span>Album Art</span
-            ><i>✦</i><span>Book Covers</span><i>✦</i><span>Web Design</span
-            ><i>✦</i><span>Merchandise</span><i>✦</i>
+            ><span>Invites &amp; Stationery</span><i>/</i><span>Album Art</span
+            ><i>/</i><span>Book Covers</span><i>/</i><span>Web Design</span
+            ><i>/</i><span>Merchandise</span><i>/</i>
           </div>
         </div>
       </div>
@@ -205,13 +206,28 @@
               </div>
               <span class="service-card__go" aria-hidden="true">→</span>
             </a>
-            <a class="service-card reveal" href="portfolio/bookcovers.html">
+            <a class="service-card reveal" href="portfolio/album-covers.html">
               <span class="service-card__num">02</span>
               <span class="service-card__icon"
                 ><img src="media/icons/palette.svg" alt=""
               /></span>
               <div class="service-card__body">
-                <h3>Art &amp; Illustration</h3>
+                <h3>Album Cover Design</h3>
+                <p>
+                  From book covers to album cover art, we bring your concepts to
+                  life with visuals that captivate and inspire using mixed
+                  media.
+                </p>
+              </div>
+              <span class="service-card__go" aria-hidden="true">→</span>
+            </a>
+            <a class="service-card reveal" href="portfolio/bookcovers.html">
+              <span class="service-card__num">03</span>
+              <span class="service-card__icon"
+                ><img src="media/icons/palette.svg" alt=""
+              /></span>
+              <div class="service-card__body">
+                <h3>Book Cover Design</h3>
                 <p>
                   From book covers to album cover art, we bring your concepts to
                   life with visuals that captivate and inspire using mixed
@@ -225,7 +241,7 @@
               href="#weddings"
               data-service="Wedding"
             >
-              <span class="service-card__num">03</span>
+              <span class="service-card__num">04</span>
               <span class="service-card__icon"
                 ><img src="media/icons/nib.svg" alt=""
               /></span>
@@ -239,7 +255,7 @@
               <span class="service-card__go" aria-hidden="true">→</span>
             </a>
             <a class="service-card reveal" href="portfolio/merch.html">
-              <span class="service-card__num">04</span>
+              <span class="service-card__num">05</span>
               <span class="service-card__icon"
                 ><img src="media/icons/shirt.svg" alt=""
               /></span>
@@ -424,17 +440,6 @@
             </div>
           </div>
         </div>
-
-        <div class="container-xl">
-          <div class="reviews reveal">
-            <img
-              src="media/images/REVIEWS.png"
-              alt="Client reviews"
-              loading="lazy"
-              decoding="async"
-            />
-          </div>
-        </div>
       </section>
 
       <!-- ============ PLANNER PARTNERSHIPS ============ -->
@@ -464,8 +469,11 @@
                 href="#contact-us"
                 data-service="Other"
                 >Become a partner
-                <span class="btn-obz__arrow" aria-hidden="true">→</span></a
-              >
+                <span
+                  class="btn-obz__arrow sym sym--spark"
+                  aria-hidden="true"
+                ></span
+              ></a>
             </div>
           </div>
         </div>
@@ -772,7 +780,10 @@
                 class="btn-obz btn-obz--primary btn-obz--block"
               >
                 Get in touch
-                <span class="btn-obz__arrow" aria-hidden="true">→</span>
+                <span
+                  class="btn-obz__arrow sym sym--spark"
+                  aria-hidden="true"
+                ></span>
               </button>
               <div id="response" role="status"></div>
             </form>
