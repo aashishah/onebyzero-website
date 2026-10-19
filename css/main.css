@@ -1189,6 +1189,7 @@ h3 {
 }
 .footer__love img {
   filter: brightness(0) invert(1);
+  height: 0.48rem;
 }
 .footer__love {
   display: inline-flex;
