@@ -435,7 +435,7 @@ h3 {
   left: 50%;
   width: 72%;
   transform: translate(-50%, -50%);
-  filter: drop-shadow(0 0 30px rgba(133, 102, 255, 0.55));
+  filter: drop-shadow(0 0 30px rgba(255, 255, 255, 0.25));
   animation: float 7s ease-in-out infinite;
   transition: opacity 1s;
 }
@@ -853,22 +853,34 @@ h3 {
 .projects {
   overflow: hidden;
 }
-.projects .swiper {
+/* Slow, continuous glide (like the marquee). Hover to pause. */
+.gallery {
+  --card-w: clamp(210px, 24vw, 340px);
+  --gap: clamp(0.9rem, 2vw, 1.5rem);
+  --glide: 200s; /* time for one full loop - higher = slower */
   margin-top: 3rem;
-  padding: 0 max(1rem, calc((100vw - 1320px) / 2));
+  overflow: hidden;
+}
+.gallery__track {
+  display: flex;
+  width: max-content;
+  animation: glide var(--glide) linear infinite;
+  will-change: transform;
+}
+.gallery:hover .gallery__track {
+  animation-play-state: paused;
 }
 .project {
-  width: clamp(280px, 34vw, 460px);
-  padding: 0 0.6rem;
-  height: auto;
+  flex: none;
+  width: var(--card-w);
+  padding-right: var(--gap); /* padding (not gap) keeps the -50% loop exact */
+  box-sizing: content-box;
 }
 .project__card {
-  position: relative;
   margin: 0;
   aspect-ratio: 4 / 5;
   overflow: hidden;
-  border: 1px solid var(--line);
-  border-radius: var(--radius);
+  border: 1px solid rgba(255, 255, 255, 0.85);
   background: var(--bg-2);
 }
 .project__card img {
@@ -876,22 +888,11 @@ h3 {
   width: 100%;
   height: 100%;
   object-fit: cover;
-  transition: transform 1.2s var(--ease);
 }
-.project:hover .project__card img {
-  transform: scale(1.05);
-}
-.project__card figcaption {
-  position: absolute;
-  inset: auto 0 0 0;
-  padding: 3rem 1.5rem 1.4rem;
-  background: linear-gradient(to top, rgba(5, 5, 5, 0.92), rgba(5, 5, 5, 0));
-}
-.project__card figcaption p {
-  margin: 0;
-  color: rgba(255, 255, 255, 0.88);
-  font-size: 0.8rem;
-  line-height: 1.5;
+@keyframes glide {
+  to {
+    transform: translateX(-50%);
+  }
 }
 
 .reviews {
@@ -1193,6 +1194,7 @@ h3 {
   display: inline-flex;
   align-items: center;
   gap: 0.5rem;
+  font-size: 0.48rem;
 }
 
 /* ---------- Scroll reveal (activated by js/effects.js) ---------- */
@@ -1221,9 +1223,24 @@ h3 {
     align-items: flex-start;
     padding-top: calc(var(--nav-h) + 3rem);
   }
+  .hero {
+    flex-direction: column;
+    align-items: stretch;
+    justify-content: flex-start;
+    padding-bottom: 3rem;
+  }
+  .hero__inner {
+    order: 1;
+  }
+  /* Infinity sits below the text instead of behind it */
   .hero__visual {
+    order: 2;
+    position: relative;
+    top: auto;
+    right: auto;
     width: 100%;
-    opacity: 0.5;
+    height: clamp(260px, 62vw, 460px);
+    margin-top: 1.5rem;
   }
   .hero__title .line:nth-child(2) {
     padding-left: 0;
@@ -1287,5 +1304,8 @@ h3 {
   .js .reveal {
     opacity: 1;
     transform: none;
+  }
+  .gallery {
+    overflow-x: auto;
   }
 }

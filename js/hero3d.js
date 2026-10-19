@@ -11,7 +11,7 @@ const CONFIG = {
   segments: 600, // smoothness along the ribbon (lowered automatically on small screens)
 
   /* Metal */
-  color: 0xffffff, // try 0xdfe3ee for slightly darker steel
+  color: 0xf4f5f7, // silver tint: 0xffffff = bright chrome, 0xc9ccd2 = darker steel
   metalness: 1,
   roughness: 0.18, // lower = mirror-like, higher = brushed
   clearcoat: 0.35,
@@ -28,6 +28,7 @@ const CONFIG = {
 
   /* Framing */
   fitWidth: 8.4, // larger = ribbon appears smaller in the hero
+  fitWidthMobile: 6.4, // same, on phones / small tablets
 };
 
 const visual = document.getElementById("heroVisual");
@@ -143,7 +144,7 @@ function init() {
   /* Studio environment: a dark room with large light panels. A flat metal band reflects these
        as long bright streaks, and the violet / teal panels tie it to the hero gradient. */
   const envScene = new THREE.Scene();
-  envScene.background = new THREE.Color(0x07070f);
+  envScene.background = new THREE.Color(0x050505);
 
   const addPanel = (color, intensity, size, position) => {
     const material = new THREE.MeshBasicMaterial({
@@ -159,12 +160,14 @@ function init() {
     envScene.add(mesh);
   };
 
+  /* All neutral greys / whites, so the metal reads as chrome silver.
+     Brighter panels = brighter streaks. Try 0xffffff everywhere for a harder mirror look. */
   addPanel(0xffffff, 6, [14, 6], [0, 9, 2]); // top softbox
-  addPanel(0x8566ff, 5, [6, 14], [-9, 1, 3]); // violet left
-  addPanel(0x66e0d2, 5, [6, 14], [9, -1, 3]); // teal right
-  addPanel(0x5b8cff, 3, [16, 4], [0, -8, 4]); // blue floor
+  addPanel(0xd5d8de, 4.5, [6, 14], [-9, 1, 3]); // left strip (cool silver)
+  addPanel(0xf2f2f2, 4.5, [6, 14], [9, -1, 3]); // right strip
+  addPanel(0x9a9ea6, 2.5, [16, 4], [0, -8, 4]); // floor (darker grey)
   addPanel(0xffffff, 4, [3, 12], [0, 0, -9]); // rim strip behind
-  addPanel(0xbfb2ff, 0.6, [10, 10], [0, 0, 10]); // soft front fill (keep low for contrast)
+  addPanel(0xffffff, 0.5, [10, 10], [0, 0, 10]); // soft front fill (keep low for contrast)
 
   const pmrem = new THREE.PMREMGenerator(renderer);
   scene.environment = pmrem.fromScene(envScene, 0.03).texture;
@@ -195,9 +198,12 @@ function init() {
     renderer.setSize(w, h, false);
     camera.aspect = w / h;
     const fov = THREE.MathUtils.degToRad(camera.fov);
+    const narrow = window.innerWidth < 992;
     const zToFitWidth =
-      CONFIG.fitWidth / 2 / (Math.tan(fov / 2) * camera.aspect);
-    camera.position.set(0, 0, Math.max(zToFitWidth, 10.5));
+      (narrow ? CONFIG.fitWidthMobile : CONFIG.fitWidth) /
+      2 /
+      (Math.tan(fov / 2) * camera.aspect);
+    camera.position.set(0, 0, Math.max(zToFitWidth, narrow ? 7 : 10.5));
     camera.updateProjectionMatrix();
   };
 

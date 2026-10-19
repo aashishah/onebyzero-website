@@ -1,21 +1,13 @@
-var swiper = new Swiper(".mySwiper", {
-  effect: "coverflow",
-  grabCursor: true,
-  centeredSlides: true,
-  loop: true,
-  slidesPerView: "auto",
-  coverflowEffect: {
-    rotate: 0,
-    stretch: 0,
-    depth: 150,
-    modifier: 2.5,
-    slideShadows: true,
-  },
-  autoplay: {
-    delay: 3000,
-    disableOnInteraction: false,
-  },
-});
+/* Recent projects: duplicate the slides once so the CSS glide loops seamlessly */
+const galleryTrack = document.querySelector(".gallery__track");
+if (galleryTrack) {
+  [...galleryTrack.children].forEach((item) => {
+    const copy = item.cloneNode(true);
+    copy.setAttribute("aria-hidden", "true");
+    copy.querySelectorAll("img").forEach((img) => (img.alt = ""));
+    galleryTrack.appendChild(copy);
+  });
+}
 
 const fadeElements = document.getElementsByClassName("scrollFade");
 
