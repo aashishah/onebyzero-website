@@ -1,0 +1,576 @@
+<!doctype html>
+<html lang="en" data-bs-theme="dark">
+  <head>
+    <meta charset="utf-8" />
+    <title>Wedding Design – OneByZero Studios</title>
+    <link rel="icon" href="../media/logos/titlelogo.png" type="image/png" />
+    <meta
+      name="description"
+      content="Wedding invite films, stationery and websites by OneByZero Studios – designed as one suite, from the first save-the-date to the last thank-you."
+    />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#050505" />
+
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH"
+      crossorigin="anonymous"
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,100..900&family=Inter:wght@300..800&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="../css/main.css" />
+    <link rel="stylesheet" href="../css/weddings.css" />
+    <!-- Scroll-reveal only hides things once JS is running, so nothing is lost without it -->
+    <script>
+      document.documentElement.classList.add("wd-js");
+    </script>
+  </head>
+  <body class="page-weddings">
+    <!-- ============ NAV ============ -->
+    <header class="site-header">
+      <nav class="navbar navbar-expand-lg site-nav" data-bs-theme="dark">
+        <div class="container-xl">
+          <a class="navbar-brand" href="../index.html">
+            <img
+              src="../media/logos/onebyzero_hw.png"
+              alt="OneByZero Studios"
+            />
+          </a>
+          <button
+            class="navbar-toggler"
+            type="button"
+            data-bs-toggle="collapse"
+            data-bs-target="#navbarNav"
+            aria-controls="navbarNav"
+            aria-expanded="false"
+            aria-label="Toggle navigation"
+          >
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav ms-auto align-items-lg-center">
+              <li class="nav-item">
+                <a class="nav-link" href="../index.html#home">Home</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="../index.html#recent-projects"
+                  >Recent Work</a
+                >
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="../index.html#services">Services</a>
+              </li>
+              <li class="nav-item">
+                <a
+                  class="nav-link"
+                  href="../index.html#frequently-asked-questions"
+                  >FAQ</a
+                >
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="../index.html#contact-us"
+                  >Contact Us</a
+                >
+              </li>
+            </ul>
+            <a
+              class="btn-obz btn-obz--primary btn-obz--sm ms-lg-4 mt-3 mt-lg-0"
+              href="../index.html#contact-us"
+              >Start a project</a
+            >
+          </div>
+        </div>
+      </nav>
+    </header>
+
+    <main>
+      <!-- ============ INTRO ============ -->
+      <section class="wd-hero">
+        <div class="container-xl">
+          <div class="wd-hero__grid">
+            <div>
+              <p class="eyebrow hero-in" style="--i: 0">Wedding Suite Design</p>
+              <h1 class="hero__title">
+                <span class="line hero-in" style="--i: 1">DESIGN THE</span>
+                <span class="line hero-in chrome-text" style="--i: 2"
+                  >PERFECT CELEBRATION</span
+                >
+              </h1>
+              <p class="hero__lead hero-in" style="--i: 3">
+                Invite films, stationery and websites – designed as one story,
+                from the first save-the-date to the last thank-you.
+              </p>
+              <div class="hero-in" style="--i: 4">
+                <a
+                  class="btn-obz btn-obz--primary"
+                  href="../index.html#contact-us"
+                  >Plan your wedding suite
+                  <span
+                    class="btn-obz__arrow sym sym--spark"
+                    aria-hidden="true"
+                  ></span
+                ></a>
+              </div>
+            </div>
+
+            <!-- Section index -->
+            <nav
+              class="wd-index hero-in"
+              style="--i: 3"
+              aria-label="On this page"
+            >
+              <a href="#invites"
+                ><span class="wd-index__no">01</span>Invites<span
+                  class="sym sym--spark"
+                  aria-hidden="true"
+                ></span
+              ></a>
+              <a href="#stationery"
+                ><span class="wd-index__no">02</span>Stationery<span
+                  class="sym sym--spark"
+                  aria-hidden="true"
+                ></span
+              ></a>
+              <a href="#websites"
+                ><span class="wd-index__no">03</span>Websites<span
+                  class="sym sym--spark"
+                  aria-hidden="true"
+                ></span
+              ></a>
+            </nav>
+          </div>
+        </div>
+      </section>
+
+      <!-- ============ 01 · INVITES (swipeable videos) ============ -->
+      <section class="wd-section" id="invites">
+        <div class="container-xl">
+          <div class="wd-head wd-reveal">
+            <div>
+              <span class="wd-num">01</span>
+              <h2>Invites</h2>
+            </div>
+            <p>
+              Motion invites that open the story – swipe through, press play.
+            </p>
+          </div>
+        </div>
+
+        <!-- To add an invite: copy one <article class="wd-slide"> block.
+             Dots, counters and the arrows update themselves.
+             Change the shape of every video with --ratio in weddings.css. -->
+        <div class="wd-invites wd-reveal">
+          <div
+            class="wd-rail"
+            id="inviteRail"
+            tabindex="0"
+            role="region"
+            aria-roledescription="carousel"
+            aria-label="Wedding invite videos"
+          >
+            <article class="wd-slide" aria-roledescription="slide">
+              <div class="wd-video">
+                <video
+                  preload="metadata"
+                  playsinline
+                  poster="../media/weddings/invites/invite-1.jpg"
+                >
+                  <source
+                    src="../media/weddings/invites/invite-1.mp4"
+                    type="video/mp4"
+                  />
+                </video>
+                <button class="wd-play" type="button" aria-label="Play video">
+                  <svg viewBox="0 0 24 24" aria-hidden="true">
+                    <path d="M8 5.5v13l11-6.5z" />
+                  </svg>
+                </button>
+              </div>
+              <div class="wd-cap">
+                <span class="wd-cap__name">Couple names</span>
+                <span class="wd-cap__no"></span>
+              </div>
+            </article>
+
+            <article class="wd-slide" aria-roledescription="slide">
+              <div class="wd-video">
+                <video
+                  preload="metadata"
+                  playsinline
+                  poster="../media/weddings/invites/invite-2.jpg"
+                >
+                  <source
+                    src="../media/weddings/invites/invite-2.mp4"
+                    type="video/mp4"
+                  />
+                </video>
+                <button class="wd-play" type="button" aria-label="Play video">
+                  <svg viewBox="0 0 24 24" aria-hidden="true">
+                    <path d="M8 5.5v13l11-6.5z" />
+                  </svg>
+                </button>
+              </div>
+              <div class="wd-cap">
+                <span class="wd-cap__name">Couple names</span>
+                <span class="wd-cap__no"></span>
+              </div>
+            </article>
+
+            <article class="wd-slide" aria-roledescription="slide">
+              <div class="wd-video">
+                <video
+                  preload="metadata"
+                  playsinline
+                  poster="../media/weddings/invites/invite-3.jpg"
+                >
+                  <source
+                    src="../media/weddings/invites/invite-3.mp4"
+                    type="video/mp4"
+                  />
+                </video>
+                <button class="wd-play" type="button" aria-label="Play video">
+                  <svg viewBox="0 0 24 24" aria-hidden="true">
+                    <path d="M8 5.5v13l11-6.5z" />
+                  </svg>
+                </button>
+              </div>
+              <div class="wd-cap">
+                <span class="wd-cap__name">Couple names</span>
+                <span class="wd-cap__no"></span>
+              </div>
+            </article>
+          </div>
+        </div>
+
+        <div class="container-xl">
+          <div class="wd-controls">
+            <div
+              class="wd-dots"
+              id="inviteDots"
+              role="group"
+              aria-label="Choose an invite"
+            ></div>
+            <div class="wd-arrows">
+              <button
+                class="wd-arrow"
+                id="invitePrev"
+                type="button"
+                aria-label="Previous invite"
+              >
+                <svg viewBox="0 0 24 24" aria-hidden="true">
+                  <path d="M15 5l-7 7 7 7" />
+                </svg>
+              </button>
+              <button
+                class="wd-arrow"
+                id="inviteNext"
+                type="button"
+                aria-label="Next invite"
+              >
+                <svg viewBox="0 0 24 24" aria-hidden="true">
+                  <path d="M9 5l7 7-7 7" />
+                </svg>
+              </button>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ============ 02 · STATIONERY (end-to-end randomised mosaic) ============ -->
+      <section class="wd-section" id="stationery">
+        <div class="container-xl">
+          <div class="wd-head wd-reveal">
+            <div>
+              <span class="wd-num">02</span>
+              <h2>Stationery</h2>
+            </div>
+            <div class="wd-head__side">
+              <p>
+                Menus, programmes, place cards and signage – one set, every
+                detail.
+              </p>
+              
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- All images share one shape (4:5). The script places them in a random
+             layout and scales each one up or down to fit; add or remove <figure>s freely. -->
+        <div class="wd-mosaic wd-reveal">
+          <div class="wd-mosaic__grid" id="mosaic">
+            <figure class="wd-tile">
+              <span class="wd-img"
+                ><img
+                  src="../media/weddings/sta-01.jpg"
+                  alt="Wedding stationery 1"
+                  loading="lazy"
+                  decoding="async"
+              /></span>
+            </figure>
+            <figure class="wd-tile">
+              <span class="wd-img"
+                ><img
+                  src="../media/weddings/sta-02.jpg"
+                  alt="Wedding stationery 2"
+                  loading="lazy"
+                  decoding="async"
+              /></span>
+            </figure>
+            <figure class="wd-tile">
+              <span class="wd-img"
+                ><img
+                  src="../media/weddings/sta-03.png"
+                  alt="Wedding stationery 3"
+                  loading="lazy"
+                  decoding="async"
+              /></span>
+            </figure>
+            <figure class="wd-tile">
+              <span class="wd-img"
+                ><img
+                  src="../media/weddings/sta-04.jpg"
+                  alt="Wedding stationery 4"
+                  loading="lazy"
+                  decoding="async"
+              /></span>
+            </figure>
+            <figure class="wd-tile">
+              <span class="wd-img"
+                ><img
+                  src="../media/weddings/sta-05.jpg"
+                  alt="Wedding stationery 5"
+                  loading="lazy"
+                  decoding="async"
+              /></span>
+            </figure>
+            <figure class="wd-tile">
+              <span class="wd-img"
+                ><img
+                  src="../media/weddings/sta-06.jpg"
+                  alt="Wedding stationery 6"
+                  loading="lazy"
+                  decoding="async"
+              /></span>
+            </figure>
+            <figure class="wd-tile">
+              <span class="wd-img"
+                ><img
+                  src="../media/weddings/sta-07.jpg"
+                  alt="Wedding stationery 7"
+                  loading="lazy"
+                  decoding="async"
+              /></span>
+            </figure>
+            <figure class="wd-tile">
+              <span class="wd-img"
+                ><img
+                  src="../media/weddings/sta-08.jpg"
+                  alt="Wedding stationery 8"
+                  loading="lazy"
+                  decoding="async"
+              /></span>
+            </figure>
+            <figure class="wd-tile">
+              <span class="wd-img"
+                ><img
+                  src="../media/weddings/sta-09.jpg"
+                  alt="Wedding stationery 9"
+                  loading="lazy"
+                  decoding="async"
+              /></span>
+            </figure>
+            <figure class="wd-tile">
+              <span class="wd-img"
+                ><img
+                  src="../media/weddings/sta-10.jpg"
+                  alt="Wedding stationery 10"
+                  loading="lazy"
+                  decoding="async"
+              /></span>
+            </figure>
+            <figure class="wd-tile">
+              <span class="wd-img"
+                ><img
+                  src="../media/weddings/sta-11.jpg"
+                  alt="Wedding stationery 11"
+                  loading="lazy"
+                  decoding="async"
+              /></span>
+            </figure>
+            <figure class="wd-tile">
+              <span class="wd-img"
+                ><img
+                  src="../media/weddings/sta-12.jpg"
+                  alt="Wedding stationery 12"
+                  loading="lazy"
+                  decoding="async"
+              /></span>
+            </figure>
+          </div>
+        </div>
+      </section>
+
+      <!-- ============ 03 · WEBSITES (scrolling GIFs) ============ -->
+      <section class="wd-section wd-section--last" id="websites">
+        <div class="container-xl">
+          <div class="wd-head wd-reveal">
+            <div>
+              <span class="wd-num">03</span>
+              <h2>Websites</h2>
+            </div>
+            <p>
+              Wedding sites that guests actually enjoy – hover a card to visit.
+            </p>
+          </div>
+
+          <!-- Cards with a link are <a class="wd-site wd-site--link" href="…">.
+               No link yet? Use <div class="wd-site"> (no arrow, not clickable). -->
+          <div class="wd-sites">
+            <a
+              class="wd-site wd-site--link wd-reveal"
+              href="https://example.com"
+              target="_blank"
+              rel="noopener"
+            >
+              <span class="wd-site__shot">
+                <img
+                  src="../media/weddings/site-1.gif"
+                  alt="Scrolling preview of the wedding website for Couple names"
+                  loading="lazy"
+                  decoding="async"
+                />
+                <span class="wd-site__go" aria-hidden="true">→</span>
+              </span>
+              <span class="wd-site__meta">
+                <span class="wd-site__name">Couple names</span>
+                <span class="wd-site__tag">Visit site</span>
+              </span>
+            </a>
+
+            <a
+              class="wd-site wd-site--link wd-reveal"
+              href="https://example.com"
+              target="_blank"
+              rel="noopener"
+            >
+              <span class="wd-site__shot">
+                <img
+                  src="../media/weddings/site-2.gif"
+                  alt="Scrolling preview of the wedding website for Couple names"
+                  loading="lazy"
+                  decoding="async"
+                />
+                <span class="wd-site__go" aria-hidden="true">→</span>
+              </span>
+              <span class="wd-site__meta">
+                <span class="wd-site__name">Couple names</span>
+                <span class="wd-site__tag">Visit site</span>
+              </span>
+            </a>
+
+            <a
+              class="wd-site wd-site--link wd-reveal"
+              href="https://example.com"
+              target="_blank"
+              rel="noopener"
+            >
+              <span class="wd-site__shot">
+                <img
+                  src="../media/weddings/site-3.gif"
+                  alt="Scrolling preview of the wedding website for Couple names"
+                  loading="lazy"
+                  decoding="async"
+                />
+                <span class="wd-site__go" aria-hidden="true">→</span>
+              </span>
+              <span class="wd-site__meta">
+                <span class="wd-site__name">Couple names</span>
+                <span class="wd-site__tag">Visit site</span>
+              </span>
+            </a>
+
+            <a
+              class="wd-site wd-site--link wd-reveal"
+              href="https://example.com"
+              target="_blank"
+              rel="noopener"
+            >
+              <span class="wd-site__shot">
+                <img
+                  src="../media/weddings/websites/site-4.gif"
+                  alt="Scrolling preview of the wedding website for Couple names"
+                  loading="lazy"
+                  decoding="async"
+                />
+                <span class="wd-site__go" aria-hidden="true">→</span>
+              </span>
+              <span class="wd-site__meta">
+                <span class="wd-site__name">Couple names</span>
+                <span class="wd-site__tag">Visit site</span>
+              </span>
+            </a>
+
+            <a
+              class="wd-site wd-site--link wd-reveal"
+              href="https://example.com"
+              target="_blank"
+              rel="noopener"
+            >
+              <span class="wd-site__shot">
+                <img
+                  src="../media/weddings/websites/site-5.gif"
+                  alt="Scrolling preview of the wedding website for Couple names"
+                  loading="lazy"
+                  decoding="async"
+                />
+                <span class="wd-site__go" aria-hidden="true">→</span>
+              </span>
+              <span class="wd-site__meta">
+                <span class="wd-site__name">Couple names</span>
+                <span class="wd-site__tag">Visit site</span>
+              </span>
+            </a>
+
+            <!-- Example of a card with no live link -->
+            <div class="wd-site wd-reveal">
+              <span class="wd-site__shot">
+                <img
+                  src="../media/weddings/websites/site-6.gif"
+                  alt="Scrolling preview of the wedding website for Couple names"
+                  loading="lazy"
+                  decoding="async"
+                />
+              </span>
+              <span class="wd-site__meta">
+                <span class="wd-site__name">Couple names</span>
+                <span class="wd-site__tag">Preview only</span>
+              </span>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="footer footer--slim">
+      <div class="container-xl">
+        <div class="footer__bottom">
+          <span>© 2026 OneByZero Studios</span>
+        </div>
+      </div>
+    </footer>
+
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
+      crossorigin="anonymous"
+    ></script>
+    <script src="../js/effects.js"></script>
+    <script src="../js/weddings.js" defer></script>
+  </body>
+</html>

@@ -1,0 +1,282 @@
+/* =========================================================
+   OneByZero – Website design page
+   Builds on css/main.css and css/weddings.css (hero, .wd-site card, footer).
+   Sections: rows · domain heading · card · text · closing CTA · responsive
+   All new classes are prefixed wb-.
+   ========================================================= */
+
+/* ---------- Project rows ---------- */
+.wb-list {
+  border-top: 1px solid var(--line);
+}
+.wb-row {
+  position: relative;
+  padding: clamp(2.75rem, 6vw, 4.75rem) 0;
+}
+
+/* Hairline above each row – draws in from the left */
+.wb-rule {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: var(--line-strong);
+  transform-origin: left;
+  transition: transform 1.3s var(--ease);
+}
+.wb-js .wb-row:not(.is-in) .wb-rule {
+  transform: scaleX(0);
+}
+
+/* ---------- Domain heading (text only, not a link) ---------- */
+.wb-row__head {
+  display: flex;
+  align-items: baseline;
+  gap: 1.25rem;
+  margin-bottom: clamp(1.5rem, 3.5vw, 2.5rem);
+}
+.wb-no {
+  align-self: flex-start;
+  margin-top: 0.6em;
+  min-width: 1.6rem;
+  color: rgba(255, 255, 255, 0.4);
+  font-size: 0.65rem;
+  font-weight: 500;
+  letter-spacing: 0.3em;
+  transition: opacity 0.8s var(--ease) 0.2s;
+}
+.wb-js .wb-row:not(.is-in) .wb-no {
+  opacity: 0;
+}
+
+.wb-domain {
+  margin: 0;
+  font-family: var(--display);
+  font-size: clamp(1.3rem, 4.4vw, 3.2rem);
+  font-weight: 800;
+  font-stretch: 125%;
+  line-height: 1.1;
+  letter-spacing: -0.01em;
+  text-transform: none; /* domains stay lowercase */
+  cursor: default;
+}
+
+/* JS splits the domain into: [www.] [name] [.tld] segments of single letters.
+   Each letter sits in a mask and rises into place while it "decodes". */
+.wb-seg {
+  display: inline-block;
+  white-space: nowrap; /* only wrap between segments, never mid-word */
+}
+.wb-c {
+  display: inline-block;
+  vertical-align: bottom;
+  overflow: hidden; /* the mask the letter rises through */
+  text-align: center;
+  /* room for ascenders / descenders (g, y, p…) without moving the layout */
+  padding: 0.06em 0 0.18em;
+  margin: -0.06em 0 -0.18em;
+}
+.wb-c__in {
+  display: inline-block;
+  transition:
+    transform 0.9s var(--ease) var(--cd, 0ms),
+    opacity 0.3s;
+}
+.wb-js .wb-row:not(.is-in) .wb-c__in {
+  transform: translateY(118%);
+}
+.wb-c__in.is-scr {
+  opacity: 0.55; /* letters look dimmer while they're still scrambling */
+}
+
+.wb-c--dim .wb-c__in {
+  color: rgba(255, 255, 255, 0.38);
+}
+.wb-c--main .wb-c__in {
+  color: #fff;
+}
+.wb-c--tld .wb-c__in {
+  background: var(--silver-text);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  color: transparent;
+}
+
+/* Chrome sparkle at the end of the heading: spins in, spins again on hover */
+.wb-spark {
+  align-self: flex-start;
+  flex: none;
+  width: clamp(0.9rem, 1.6vw, 1.4rem);
+  height: clamp(0.9rem, 1.6vw, 1.4rem);
+  margin: 0.5em 0 0 auto;
+  background: var(--chrome);
+  transition: transform 1s var(--ease) 0.9s;
+}
+.wb-js .wb-row:not(.is-in) .wb-spark {
+  transform: scale(0) rotate(-120deg);
+}
+.wb-row.is-in:hover .wb-spark {
+  transform: rotate(180deg) scale(1.3);
+  transition-delay: 0s;
+  transition-duration: 0.7s;
+}
+
+/* ---------- Body: card left, text right ---------- */
+.wb-row__body {
+  display: grid;
+  grid-template-columns: minmax(0, 1.5fr) minmax(0, 1fr);
+  gap: clamp(1.75rem, 4vw, 4.5rem);
+  align-items: start;
+}
+
+/* Website card = the same .wd-site card as the wedding page.
+   Here it is black & white until you hover the row, then colour. */
+.wb-row .wd-site__shot {
+  transition:
+    clip-path 1.2s var(--ease) 0.15s,
+    border-color 0.4s;
+  clip-path: inset(0 0 0 0);
+}
+.wb-js .wb-row:not(.is-in) .wd-site__shot {
+  clip-path: inset(0 100% 0 0); /* wipes in from the left */
+}
+.wb-row .wd-site__shot img {
+  filter: grayscale(1) contrast(1.05);
+  transition:
+    filter 0.6s var(--ease),
+    transform 1.4s var(--ease) 0.15s;
+}
+.wb-js .wb-row:not(.is-in) .wd-site__shot img {
+  transform: scale(1.14);
+}
+.wb-row:hover .wd-site__shot {
+  border-color: var(--line-strong);
+}
+.wb-row.is-in:hover .wd-site__shot img {
+  filter: none;
+  transform: scale(1.03);
+  transition-delay: 0s;
+  transition-duration: 0.6s, 0.9s;
+}
+.wb-row .wd-site__shot::after {
+  display: none; /* no hover vignette here */
+}
+@media (hover: none) {
+  .wb-row .wd-site__shot img {
+    filter: none; /* touch screens have no hover, so show colour */
+  }
+}
+
+/* ---------- Text on the right ---------- */
+.wb-info {
+  display: flex;
+  flex-direction: column;
+  gap: 1.4rem;
+}
+.wb-info .eyebrow {
+  margin: 0;
+}
+.wb-desc {
+  max-width: 30rem;
+  margin: 0;
+  color: rgba(255, 255, 255, 0.78);
+  font-size: 0.95rem;
+  line-height: 1.75;
+}
+
+.wb-meta {
+  margin: 0.5rem 0 0;
+  border-bottom: 1px solid var(--line);
+}
+.wb-meta div {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 0.85rem 0;
+  border-top: 1px solid var(--line);
+}
+.wb-meta dt {
+  color: var(--muted);
+  font-family: var(--display);
+  font-size: 0.62rem;
+  font-weight: 600;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+}
+.wb-meta dd {
+  margin: 0;
+  font-size: 0.82rem;
+  text-align: right;
+}
+
+/* Text rises in one piece after another */
+.wb-info > * {
+  transition:
+    opacity 0.9s var(--ease) calc(0.45s + var(--k, 0) * 0.14s),
+    transform 0.9s var(--ease) calc(0.45s + var(--k, 0) * 0.14s);
+}
+.wb-info > :nth-child(1) {
+  --k: 0;
+}
+.wb-info > :nth-child(2) {
+  --k: 1;
+}
+.wb-info > :nth-child(3) {
+  --k: 2;
+}
+.wb-js .wb-row:not(.is-in) .wb-info > * {
+  opacity: 0;
+  transform: translateY(20px);
+}
+
+/* ---------- Closing CTA ---------- */
+.wb-cta {
+  padding: clamp(3.5rem, 8vw, 6rem) 0;
+  border-top: 1px solid var(--line);
+}
+.wb-cta__inner {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1.75rem 2.5rem;
+}
+.wb-cta h2 {
+  margin: 0;
+  font-size: clamp(1.4rem, 3.4vw, 2.4rem);
+}
+
+/* ---------- Responsive ---------- */
+@media (max-width: 899.98px) {
+  /* text moves underneath the card */
+  .wb-row__body {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 1.75rem;
+  }
+  .wb-desc {
+    max-width: none;
+  }
+}
+@media (max-width: 575.98px) {
+  .wb-domain {
+    font-size: clamp(1.15rem, 6.4vw, 1.6rem);
+  }
+  .wb-row__head {
+    gap: 0.9rem;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .wb-rule,
+  .wb-no,
+  .wb-c__in,
+  .wb-spark,
+  .wb-row .wd-site__shot,
+  .wb-row .wd-site__shot img,
+  .wb-info > * {
+    transition: none;
+  }
+}

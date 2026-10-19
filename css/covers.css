@@ -39,18 +39,23 @@ body.page-covers main {
 }
 .covers {
   position: relative;
+  display: flex; /* new */
+  flex-direction: column;
   height: 100%;
-  padding-top: calc(var(--nav-h) + 0.5rem);
+  padding: calc(var(--nav-h) + 0.5rem) 0 3.25rem;
   overflow: hidden;
   isolation: isolate;
 }
 
+.covers > .container-xl {
+  flex: none; /* new: the header keeps its natural height */
+}
+
 #track {
-  position: absolute;
-  top: calc(var(--nav-h) + 6rem);
-  bottom: 3.25rem;
-  left: 0;
-  right: 0;
+  position: relative;
+  flex: 1 1 0;
+  min-height: 0;
+  container-type: size;
   display: flex;
   align-items: center;
   gap: 56px;
@@ -76,10 +81,10 @@ body.page-covers main {
     transform 0.5s;
 }
 .card:nth-child(odd) {
-  transform: translateY(-7vh);
+  transform: translateY(-7cqh);
 }
 .card:nth-child(even) {
-  transform: translateY(8vh) scale(0.88);
+  transform: translateY(8cqh) scale(0.88);
 }
 .card:nth-child(3n) {
   --s: 1.1;
@@ -94,8 +99,8 @@ body.page-covers main {
 }
 .cover {
   position: relative;
-  width: min(clamp(120px, calc(57vh - 12.2rem), 250px), 56vw);
-  width: min(clamp(120px, calc(57svh - 12.2rem), 250px), 56vw);
+  width: min(250px, 56vw, 52vh); /* fallback for very old browsers */
+  width: min(250px, 56vw, max(96px, 52cqh)); /* 52% of the track's own height */
   aspect-ratio: 2/3;
   border-radius: 4px 10px 10px 4px;
   overflow: hidden;
@@ -144,112 +149,11 @@ body.page-covers main {
   font-style: italic;
   font-weight: 500;
 }
-/* designs */
+
 .img {
   background: linear-gradient(#0b2a33, #041014);
 }
-.v1 .art {
-  background:
-    radial-gradient(circle at 50% 38%, #ffd9a0 0 12%, transparent 13%),
-    repeating-linear-gradient(
-      0deg,
-      transparent 0 9px,
-      rgba(127, 211, 224, 0.18) 9px 10px
-    );
-  -webkit-mask: linear-gradient(#000 60%, transparent);
-  mask: linear-gradient(#000 60%, transparent);
-}
-.v2 {
-  background: linear-gradient(160deg, #5a0f2e, #1c0510);
-  color: #ffd6e2;
-}
-.v2 .art {
-  background:
-    radial-gradient(ellipse at 30% 25%, #ff5a8a88, transparent 55%),
-    radial-gradient(ellipse at 80% 60%, #ffb36b55, transparent 50%);
-}
-.v3 {
-  background: #05060f;
-}
-.v3 .art {
-  background: repeating-radial-gradient(
-    circle at 50% 35%,
-    transparent 0 14px,
-    rgba(123, 108, 255, 0.55) 15px 16px
-  );
-  -webkit-mask: radial-gradient(circle at 50% 35%, #000 20%, transparent 70%);
-  mask: radial-gradient(circle at 50% 35%, #000 20%, transparent 70%);
-}
-.v4 {
-  background: #ece6da;
-  color: #1a1713;
-}
-.v4 .art {
-  background:
-    linear-gradient(#1a1713, #1a1713) 12% 14%/34% 3px no-repeat,
-    linear-gradient(#c4552d, #c4552d) 12% 22%/42% 32% no-repeat;
-}
-.v5 {
-  background: linear-gradient(#150a05, #000);
-  color: #ffb25a;
-}
-.v5 .art {
-  background: conic-gradient(
-    from 210deg at 50% 38%,
-    transparent 0 120deg,
-    #ff7a1a 120deg 240deg,
-    transparent 240deg
-  );
-  -webkit-mask: linear-gradient(#000 55%, transparent);
-  mask: linear-gradient(#000 55%, transparent);
-  clip-path: polygon(50% 12%, 82% 62%, 18% 62%);
-}
-.v6 {
-  background: #0e3a8a;
-}
-.v6 .art {
-  background: repeating-linear-gradient(
-    100deg,
-    transparent 0 22px,
-    rgba(255, 255, 255, 0.14) 22px 44px
-  );
-}
-.v7 {
-  background: #1b1410;
-  color: #e6c27a;
-  border: 1px solid #e6c27a;
-  outline: 6px solid #1b1410;
-  outline-offset: -14px;
-}
-.v7 .art {
-  background: radial-gradient(
-    circle at 50% 32%,
-    transparent 0 22%,
-    #e6c27a 22.5% 23.5%,
-    transparent 24% 33%,
-    #e6c27a55 33.5% 34%,
-    transparent 34.5%
-  );
-}
-.v8 {
-  background: linear-gradient(135deg, #7b6cff, #ff5fa2 55%, #ffd36b);
-}
-.v8 .art {
-  background: radial-gradient(circle at 70% 25%, #fff8 0, transparent 40%);
-}
-.v8 .t,
-.v8 .a {
-  color: #12051f;
-}
-.v9 {
-  background: #e8ff5a;
-  color: #0b0b0b;
-}
-.v9 .art {
-  background:
-    radial-gradient(circle at 50% 30%, #0b0b0b 0 16%, transparent 16.5%),
-    radial-gradient(circle at 80% 70%, #0b0b0b 0 6%, transparent 6.5%);
-}
+
 .label {
   position: relative;
   z-index: 5;
@@ -281,6 +185,18 @@ body.page-covers main {
   margin-inline: auto;
   z-index: 5;
   pointer-events: none;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: 0.6rem 1.5rem;
+  width: var(--stage-w);
+  margin-top: 0.75rem;
+  color: var(--muted);
+  font-family: var(--display);
+  font-size: 0.62rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
 }
 .prog {
   width: 140px;
@@ -305,6 +221,7 @@ body.page-covers main {
   background: var(--chrome);
   border-radius: 2px;
 }
+
 #view {
   position: fixed;
   inset: 0;

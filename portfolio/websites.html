@@ -1,0 +1,358 @@
+<!doctype html>
+<html lang="en" data-bs-theme="dark">
+  <head>
+    <meta charset="utf-8" />
+    <title>Website Design – OneByZero Studios</title>
+    <link rel="icon" href="../media/logos/titlelogo.png" type="image/png" />
+    <meta
+      name="description"
+      content="Website design by OneByZero Studios – custom sites designed and built to feel as good as they look. A selection of recent work."
+    />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#050505" />
+
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH"
+      crossorigin="anonymous"
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,100..900&family=Inter:wght@300..800&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="../css/main.css" />
+    <!-- shared with the wedding page: hero, website card (.wd-site), footer -->
+    <link rel="stylesheet" href="../css/weddings.css" />
+    <link rel="stylesheet" href="../css/webdesign.css" />
+    <!-- Text only starts hidden once JS is running, so nothing is lost without it -->
+    <script>
+      document.documentElement.classList.add("wb-js");
+    </script>
+  </head>
+  <body class="page-webdesign">
+    <!-- ============ NAV ============ -->
+    <header class="site-header">
+      <nav class="navbar navbar-expand-lg site-nav" data-bs-theme="dark">
+        <div class="container-xl">
+          <a class="navbar-brand" href="../index.html">
+            <img
+              src="../media/logos/onebyzero_hw.png"
+              alt="OneByZero Studios"
+            />
+          </a>
+          <button
+            class="navbar-toggler"
+            type="button"
+            data-bs-toggle="collapse"
+            data-bs-target="#navbarNav"
+            aria-controls="navbarNav"
+            aria-expanded="false"
+            aria-label="Toggle navigation"
+          >
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav ms-auto align-items-lg-center">
+              <li class="nav-item">
+                <a class="nav-link" href="../index.html#home">Home</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="../index.html#recent-projects"
+                  >Recent Work</a
+                >
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="../index.html#services">Services</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="../index.html#weddings">Weddings</a>
+              </li>
+              <li class="nav-item">
+                <a
+                  class="nav-link"
+                  href="../index.html#frequently-asked-questions"
+                  >FAQ</a
+                >
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="../index.html#contact-us"
+                  >Contact Us</a
+                >
+              </li>
+            </ul>
+            <a
+              class="btn-obz btn-obz--primary btn-obz--sm ms-lg-4 mt-3 mt-lg-0"
+              href="../index.html#contact-us"
+              >Start a project</a
+            >
+          </div>
+        </div>
+      </nav>
+    </header>
+
+    <main>
+      <!-- ============ INTRO ============ -->
+      <section class="wd-hero">
+        <div class="container-xl">
+          <div class="wd-hero__grid">
+            <div>
+              <p class="eyebrow hero-in" style="--i: 0">
+                Web Design and Development
+              </p>
+              <h1 class="hero__title">
+                <span class="line hero-in" style="--i: 1">CREATE</span>
+                <span class="line hero-in chrome-text" style="--i: 2"
+                  >YOUR DIGITAL EXPERIENCE</span
+                >
+              </h1>
+            </div>
+            <div>
+              <p class="hero__lead hero-in" style="--i: 3">
+                Sites designed and built to feel as good as they look – a few
+                recent ones below.
+              </p>
+              <div class="hero-in" style="--i: 4">
+                <a
+                  class="btn-obz btn-obz--primary"
+                  href="../index.html#contact-us"
+                  >Start a website project
+                  <span
+                    class="btn-obz__arrow sym sym--spark"
+                    aria-hidden="true"
+                  ></span
+                ></a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ============ PROJECTS ============
+           To add a site: copy one <article class="wb-row"> block.
+           The domain is written once, in data-domain (also repeat it as the
+           heading text for browsers without JS). It is text only – not a link. -->
+      <section class="wb-list" aria-label="Website projects">
+        <div class="container-xl">
+          <!-- 01 -->
+          <article class="wb-row">
+            <span class="wb-rule" aria-hidden="true"></span>
+            <header class="wb-row__head">
+              <span class="wb-no">01</span>
+              <h2 class="wb-domain" data-domain="www.example.com">
+                www.example.com
+              </h2>
+              <span class="wb-spark sym sym--spark" aria-hidden="true"></span>
+            </header>
+            <div class="wb-row__body">
+              <div class="wd-site">
+                <span class="wd-site__shot">
+                  <img
+                    src="../media/webdesign/site-1.gif"
+                    alt="Scrolling preview of www.example.com"
+                    loading="lazy"
+                    decoding="async"
+                  />
+                </span>
+              </div>
+              <div class="wb-info">
+                <p class="eyebrow">Brand website</p>
+                <p class="wb-desc">
+                  A short description of the site: who it is for, what the brief
+                  was and what makes the design work. Two or three sentences is
+                  plenty.
+                </p>
+                <dl class="wb-meta">
+                  <div>
+                    <dt>Services</dt>
+                    <dd>Design, Build</dd>
+                  </div>
+                  <div>
+                    <dt>Platform</dt>
+                    <dd>Custom</dd>
+                  </div>
+                  <div>
+                    <dt>Year</dt>
+                    <dd>2026</dd>
+                  </div>
+                </dl>
+              </div>
+            </div>
+          </article>
+
+          <!-- 02 -->
+          <article class="wb-row">
+            <span class="wb-rule" aria-hidden="true"></span>
+            <header class="wb-row__head">
+              <span class="wb-no">02</span>
+              <h2 class="wb-domain" data-domain="www.brandname.co">
+                www.brandname.co
+              </h2>
+              <span class="wb-spark sym sym--spark" aria-hidden="true"></span>
+            </header>
+            <div class="wb-row__body">
+              <div class="wd-site">
+                <span class="wd-site__shot">
+                  <img
+                    src="../media/webdesign/site-2.gif"
+                    alt="Scrolling preview of www.brandname.co"
+                    loading="lazy"
+                    decoding="async"
+                  />
+                </span>
+              </div>
+              <div class="wb-info">
+                <p class="eyebrow">Portfolio</p>
+                <p class="wb-desc">
+                  A short description of the site: who it is for, what the brief
+                  was and what makes the design work. Two or three sentences is
+                  plenty.
+                </p>
+                <dl class="wb-meta">
+                  <div>
+                    <dt>Services</dt>
+                    <dd>Design, Build</dd>
+                  </div>
+                  <div>
+                    <dt>Platform</dt>
+                    <dd>Webflow</dd>
+                  </div>
+                  <div>
+                    <dt>Year</dt>
+                    <dd>2026</dd>
+                  </div>
+                </dl>
+              </div>
+            </div>
+          </article>
+
+          <!-- 03 -->
+          <article class="wb-row">
+            <span class="wb-rule" aria-hidden="true"></span>
+            <header class="wb-row__head">
+              <span class="wb-no">03</span>
+              <h2 class="wb-domain" data-domain="www.couplenames.com">
+                www.couplenames.com
+              </h2>
+              <span class="wb-spark sym sym--spark" aria-hidden="true"></span>
+            </header>
+            <div class="wb-row__body">
+              <div class="wd-site">
+                <span class="wd-site__shot">
+                  <img
+                    src="../media/webdesign/site-3.gif"
+                    alt="Scrolling preview of www.couplenames.com"
+                    loading="lazy"
+                    decoding="async"
+                  />
+                </span>
+              </div>
+              <div class="wb-info">
+                <p class="eyebrow">Wedding website</p>
+                <p class="wb-desc">
+                  A short description of the site: who it is for, what the brief
+                  was and what makes the design work. Two or three sentences is
+                  plenty.
+                </p>
+                <dl class="wb-meta">
+                  <div>
+                    <dt>Services</dt>
+                    <dd>Design, Build</dd>
+                  </div>
+                  <div>
+                    <dt>Platform</dt>
+                    <dd>Custom</dd>
+                  </div>
+                  <div>
+                    <dt>Year</dt>
+                    <dd>2025</dd>
+                  </div>
+                </dl>
+              </div>
+            </div>
+          </article>
+
+          <!-- 04 -->
+          <article class="wb-row">
+            <span class="wb-rule" aria-hidden="true"></span>
+            <header class="wb-row__head">
+              <span class="wb-no">04</span>
+              <h2 class="wb-domain" data-domain="www.yourdomain.in">
+                www.yourdomain.in
+              </h2>
+              <span class="wb-spark sym sym--spark" aria-hidden="true"></span>
+            </header>
+            <div class="wb-row__body">
+              <div class="wd-site">
+                <span class="wd-site__shot">
+                  <img
+                    src="../media/webdesign/site-4.gif"
+                    alt="Scrolling preview of www.yourdomain.in"
+                    loading="lazy"
+                    decoding="async"
+                  />
+                </span>
+              </div>
+              <div class="wb-info">
+                <p class="eyebrow">Small business</p>
+                <p class="wb-desc">
+                  A short description of the site: who it is for, what the brief
+                  was and what makes the design work. Two or three sentences is
+                  plenty.
+                </p>
+                <dl class="wb-meta">
+                  <div>
+                    <dt>Services</dt>
+                    <dd>Design, Build</dd>
+                  </div>
+                  <div>
+                    <dt>Platform</dt>
+                    <dd>Wix</dd>
+                  </div>
+                  <div>
+                    <dt>Year</dt>
+                    <dd>2025</dd>
+                  </div>
+                </dl>
+              </div>
+            </div>
+          </article>
+        </div>
+      </section>
+
+      <!-- ============ CLOSING CTA ============ -->
+      <section class="wb-cta">
+        <div class="container-xl">
+          <div class="wb-cta__inner">
+            <h2>Have a <em class="serif-accent">site</em> in mind?</h2>
+            <a class="btn-obz btn-obz--primary" href="../index.html#contact-us"
+              >Start a project
+              <span
+                class="btn-obz__arrow sym sym--spark"
+                aria-hidden="true"
+              ></span
+            ></a>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="footer footer--slim">
+      <div class="container-xl">
+        <div class="footer__bottom">
+          <span>© 2026 OneByZero Studios</span>
+        </div>
+      </div>
+    </footer>
+
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
+      crossorigin="anonymous"
+    ></script>
+    <script src="../js/effects.js"></script>
+    <script src="../js/webdesign.js" defer></script>
+  </body>
+</html>

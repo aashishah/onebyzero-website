@@ -14,6 +14,7 @@
     "../media/covers/into_space.jpg",
     "../media/covers/Islept2.jpg",
     "../media/covers/luciddream.jpg",
+    "../media/covers/TL_Dark.jpg",
     "../media/covers/yeha.jpg",
     "../media/covers/ls2.jpg",
     "../media/covers/MELTDOWN.jpeg",

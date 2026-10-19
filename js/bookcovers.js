@@ -81,7 +81,6 @@ T.innerHTML = B.map(
 const pad = (n) => String(n + 1).padStart(2, "0");
 // cursor glow + hover colour
 addEventListener("pointermove", (e) => {
-  const g = $("#glow").style;
   g.setProperty("--mx", e.clientX + "px");
   g.setProperty("--my", e.clientY + "px");
 });
@@ -95,10 +94,8 @@ T.querySelectorAll(".card").forEach((c) => {
       y = (e.clientY - r.top) / r.height - 0.5;
     cv.style.transform = `rotateY(${x * 22}deg) rotateX(${-y * 18}deg) scale(1.06)`;
   };
-  c.onpointerenter = () => $("#glow").style.setProperty("--glow", b[4] + "aa");
   c.onpointerleave = () => {
     cv.style.transform = "";
-    $("#glow").style.setProperty("--glow", "#5b34d6");
   };
 });
 // wheel -> horizontal, drag to scroll

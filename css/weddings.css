@@ -1,0 +1,620 @@
+/* =========================================================
+   OneByZero – Wedding page
+   Builds on css/main.css (tokens, nav, buttons, symbols, eyebrow).
+   Sections: hero · section heads · invites · stationery · websites · footer
+   Everything here is prefixed wd- so it can't clash with main.css.
+   ========================================================= */
+
+/* ---------- Scroll reveal (only active when JS is running) ---------- */
+.wd-reveal {
+  transition:
+    opacity 0.9s var(--ease),
+    transform 0.9s var(--ease);
+}
+.wd-js .wd-reveal:not(.wd-in) {
+  opacity: 0;
+  transform: translateY(26px);
+}
+
+/* ---------- Hero ---------- */
+.wd-hero {
+  padding: calc(var(--nav-h) + clamp(3rem, 7vw, 5.5rem)) 0
+    clamp(2.5rem, 5vw, 4rem);
+}
+.wd-hero__grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1.5fr) minmax(0, 1fr);
+  gap: 2.5rem clamp(2rem, 6vw, 6rem);
+  align-items: end;
+}
+.wd-hero__title {
+  margin: 1rem 0 1.25rem;
+  font-family: var(--display);
+  font-size: clamp(2rem, 5.4vw, 4rem);
+  font-weight: 800;
+  font-stretch: 125%;
+  line-height: 1.02;
+  letter-spacing: -0.01em;
+  text-transform: uppercase;
+}
+.wd-hero__title .line {
+  display: block;
+}
+
+/* On-page index: hairline rows, sparkle turns on hover */
+.wd-index {
+  display: flex;
+  flex-direction: column;
+  border-bottom: 1px solid var(--line);
+}
+.wd-index a {
+  display: flex;
+  align-items: center;
+  gap: 1.25rem;
+  padding: 1.15rem 0;
+  border-top: 1px solid var(--line);
+  color: rgba(255, 255, 255, 0.78);
+  font-family: var(--display);
+  font-size: 0.72rem;
+  font-weight: 800;
+  font-stretch: 125%;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  text-decoration: none;
+  transition:
+    color 0.3s,
+    padding 0.5s var(--ease);
+}
+.wd-index a .sym {
+  margin-left: auto;
+  width: 0.95rem;
+  height: 0.95rem;
+  background: var(--chrome);
+  transition: transform 0.6s var(--ease);
+}
+.wd-index a:hover,
+.wd-index a:focus-visible {
+  color: #fff;
+  padding-left: 0.5rem;
+}
+.wd-index a:hover .sym,
+.wd-index a:focus-visible .sym {
+  transform: rotate(180deg) scale(1.2);
+}
+.wd-index__no {
+  min-width: 1.6rem;
+  color: rgba(255, 255, 255, 0.4);
+  font-size: 0.65rem;
+  font-weight: 500;
+  letter-spacing: 0.3em;
+}
+
+/* ---------- Sections ---------- */
+.wd-section {
+  padding-top: clamp(3.5rem, 8vw, 6.5rem);
+  scroll-margin-top: calc(var(--nav-h) - 1rem);
+  border-top: 1px solid var(--line);
+}
+.wd-section--last {
+  padding-bottom: clamp(4rem, 9vw, 7rem);
+}
+
+.wd-head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 1.25rem 2.5rem;
+  margin-bottom: clamp(1.75rem, 3.5vw, 2.75rem);
+}
+.wd-head h2 {
+  margin: 0;
+}
+.wd-head p {
+  max-width: 24rem;
+  margin: 0;
+  color: var(--muted);
+  font-size: 0.85rem;
+  line-height: 1.7;
+}
+.wd-head__side {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 1.1rem;
+}
+.wd-num {
+  display: block;
+  margin-bottom: 0.7rem;
+  color: rgba(255, 255, 255, 0.4);
+  font-size: 0.65rem;
+  font-weight: 500;
+  letter-spacing: 0.3em;
+}
+
+/* =========================================================
+   01 · INVITES – swipeable video carousel
+   Native scroll-snap = swipe on touch, trackpad and arrows;
+   weddings.js adds buttons, dots, mouse-drag and auto-pause.
+   ========================================================= */
+.wd-invites {
+  container-type: inline-size; /* lets the rail size slides from its own width */
+}
+.wd-rail {
+  --slide-w: min(78vw, 60rem);
+  --slide-w: min(78cqw, 60rem);
+  --ratio: 16 / 9; /* change to 4 / 5 or 9 / 16 for portrait invites */
+  --edge: calc((100cqw - var(--slide-w)) / 2);
+  position: relative;
+  display: flex;
+  gap: clamp(1rem, 2.5vw, 2rem);
+  padding: 0.5rem var(--edge) 0.5rem;
+  scroll-padding-inline: var(--edge);
+  overflow-x: auto;
+  overflow-y: hidden;
+  scroll-snap-type: x mandatory;
+  overscroll-behavior-x: contain;
+  scrollbar-width: none;
+  -webkit-overflow-scrolling: touch;
+  cursor: grab;
+  outline: none;
+  -webkit-user-select: none;
+  user-select: none;
+}
+.wd-rail::-webkit-scrollbar {
+  display: none;
+}
+.wd-rail.is-dragging {
+  cursor: grabbing;
+}
+.wd-rail:focus-visible {
+  outline: 2px solid #fff;
+  outline-offset: -2px;
+}
+
+.wd-slide {
+  flex: none;
+  width: var(--slide-w);
+  scroll-snap-align: center;
+  opacity: 0.35;
+  transform: scale(0.94);
+  transition:
+    opacity 0.5s var(--ease),
+    transform 0.7s var(--ease);
+}
+.wd-slide.is-active {
+  opacity: 1;
+  transform: none;
+}
+
+.wd-video {
+  position: relative;
+  aspect-ratio: var(--ratio);
+  overflow: hidden;
+  border: 1px solid var(--line);
+  background: var(--bg-2);
+}
+.wd-video video {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  background: #000;
+}
+.wd-slide.is-active .wd-video {
+  border-color: var(--line-strong);
+}
+
+/* Round play button: outline at rest, chrome fill + sheen on hover (like .btn-obz) */
+.wd-play {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  z-index: 2;
+  isolation: isolate;
+  overflow: hidden;
+  display: grid;
+  place-items: center;
+  width: clamp(56px, 8vw, 84px);
+  aspect-ratio: 1;
+  padding: 0;
+  border: 1px solid rgba(255, 255, 255, 0.85);
+  border-radius: 50%;
+  background: rgba(5, 5, 5, 0.45);
+  -webkit-backdrop-filter: blur(8px);
+  backdrop-filter: blur(8px);
+  color: #fff;
+  cursor: pointer;
+  transform: translate(-50%, -50%);
+  transition:
+    transform 0.5s var(--ease),
+    opacity 0.4s,
+    color 0.3s,
+    border-color 0.3s,
+    box-shadow 0.4s var(--ease);
+}
+.wd-play svg {
+  width: 34%;
+  height: 34%;
+  margin-left: 6%; /* optical centring of the triangle */
+  fill: currentColor;
+}
+.wd-play::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background: var(--chrome);
+  background-size: 220% 220%;
+  opacity: 0;
+  transition: opacity 0.35s;
+}
+.wd-play:hover,
+.wd-play:focus-visible {
+  color: #050505;
+  border-color: #fff;
+  transform: translate(-50%, -50%) scale(1.08);
+  box-shadow: 0 10px 40px -12px rgba(255, 255, 255, 0.6);
+}
+.wd-play:hover::before,
+.wd-play:focus-visible::before {
+  opacity: 1;
+  animation: chrome-shift 2.6s ease-in-out infinite alternate;
+}
+.wd-slide.is-playing .wd-play {
+  opacity: 0;
+  pointer-events: none;
+}
+
+.wd-cap {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  margin-top: 1rem;
+  font-family: var(--display);
+  font-size: 0.66rem;
+  font-weight: 700;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+}
+.wd-cap__no {
+  color: var(--muted);
+  font-weight: 500;
+  letter-spacing: 0.3em;
+}
+
+.wd-controls {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1.5rem;
+  margin-top: 1.5rem;
+}
+
+/* Progress dots – same idea as the album page */
+.wd-dots {
+  display: flex;
+  align-items: center;
+  gap: 0.35rem;
+}
+.wd-dots button {
+  position: relative;
+  width: 32px;
+  height: 16px;
+  padding: 0;
+  border: 0;
+  background: none;
+  cursor: pointer;
+}
+.wd-dots button::before,
+.wd-dots button::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 50%;
+  height: 3px;
+  margin-top: -1.5px;
+  border-radius: 2px;
+}
+.wd-dots button::before {
+  background: rgba(255, 255, 255, 0.16);
+  transition: background 0.3s;
+}
+.wd-dots button::after {
+  background: var(--chrome);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.6s var(--ease);
+}
+.wd-dots button:hover::before {
+  background: rgba(255, 255, 255, 0.32);
+}
+.wd-dots button.is-active::after {
+  transform: scaleX(1);
+}
+.wd-dots button:focus-visible {
+  outline: 2px solid #fff;
+  outline-offset: 2px;
+  border-radius: 4px;
+}
+
+.wd-arrows {
+  display: flex;
+  gap: 0.6rem;
+}
+.wd-arrow {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  display: grid;
+  place-items: center;
+  width: 46px;
+  height: 46px;
+  padding: 0;
+  border: 1px solid var(--line-strong);
+  border-radius: 50%;
+  background: transparent;
+  color: #fff;
+  cursor: pointer;
+  transition:
+    color 0.3s,
+    border-color 0.3s,
+    opacity 0.3s,
+    transform 0.4s var(--ease);
+}
+.wd-arrow svg {
+  width: 18px;
+  height: 18px;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.6;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+.wd-arrow::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background: var(--chrome);
+  opacity: 0;
+  transition: opacity 0.35s;
+}
+.wd-arrow:hover:not(:disabled),
+.wd-arrow:focus-visible {
+  color: #050505;
+  border-color: transparent;
+  transform: translateY(-2px);
+}
+.wd-arrow:hover:not(:disabled)::before,
+.wd-arrow:focus-visible::before {
+  opacity: 1;
+}
+.wd-arrow:disabled {
+  opacity: 0.3;
+  cursor: default;
+}
+
+/* =========================================================
+   02 · STATIONERY – end-to-end randomised mosaic
+   Every tile is the same 4:5 shape. A tile covers N×N grid cells and each
+   cell is 4:5, so a 1×1, 2×2 or 3×3 tile keeps the same proportions and
+   just scales. weddings.js chooses the sizes and positions.
+   Without JS this falls back to an even 4-column grid.
+   ========================================================= */
+.wd-mosaic {
+  container-type: inline-size;
+  border-block: 1px solid var(--line);
+}
+.wd-mosaic__grid {
+  --cols: 4;
+  display: grid;
+  grid-template-columns: repeat(var(--cols), minmax(0, 1fr));
+  grid-auto-rows: calc(100vw / var(--cols) * 1.25);
+  grid-auto-rows: calc(100cqw / var(--cols) * 1.25);
+}
+.wd-tile {
+  position: relative;
+  margin: 0;
+  padding: 3px;
+}
+.wd-tile[hidden] {
+  display: none;
+}
+.wd-img {
+  display: block;
+  height: 100%;
+  overflow: hidden;
+  background: var(--bg-2);
+}
+.wd-img img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition:
+    transform 0.9s var(--ease),
+    filter 0.5s;
+}
+.wd-tile:hover .wd-img img {
+  transform: scale(1.05);
+}
+/* Fades in each time the layout is (re)generated */
+.wd-tile.wd-pop {
+  animation: wd-pop 0.7s var(--ease) both;
+  animation-delay: calc(var(--n, 0) * 45ms);
+}
+@keyframes wd-pop {
+  from {
+    opacity: 0;
+    transform: scale(0.96);
+  }
+}
+
+/* =========================================================
+   03 · WEBSITES – responsive grid of scrolling GIFs
+   ========================================================= */
+.wd-sites {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(min(100%, 22rem), 1fr));
+  gap: clamp(1.5rem, 3vw, 2.5rem) clamp(1.25rem, 2.5vw, 2rem);
+}
+.wd-site {
+  display: block;
+  color: inherit;
+  text-decoration: none;
+}
+.wd-site__shot {
+  position: relative;
+  display: block;
+  aspect-ratio: 16 / 10;
+  overflow: hidden;
+  border: 1px solid var(--line);
+  background: var(--bg-2);
+  transition: border-color 0.4s;
+}
+.wd-site__shot img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  filter: grayscale(1) contrast(1.05);
+  transition:
+    filter 0.6s var(--ease),
+    transform 0.9s var(--ease);
+}
+/* soft vignette that appears with the black & white */
+.wd-site__shot::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to top, rgba(5, 5, 5, 0.6), transparent 55%);
+  opacity: 0;
+  transition: opacity 0.5s;
+  pointer-events: none;
+}
+.wd-site:hover .wd-site__shot,
+.wd-site:focus-visible .wd-site__shot {
+  border-color: var(--line-strong);
+}
+.wd-site:hover img,
+.wd-site:focus-visible img {
+  filter: none;
+  transform: scale(1.03);
+}
+.wd-site:hover .wd-site__shot::after,
+.wd-site:focus-visible .wd-site__shot::after {
+  opacity: 1;
+}
+.wd-site:focus-visible {
+  outline: 2px solid #fff;
+  outline-offset: 6px;
+}
+
+/* Silver arrow – same behaviour as the service cards on the home page */
+.wd-site__go {
+  position: absolute;
+  right: 1rem;
+  bottom: 1rem;
+  z-index: 2;
+  display: grid;
+  place-items: center;
+  width: 44px;
+  height: 44px;
+  border: 1px solid rgba(255, 255, 255, 0.6);
+  border-radius: 50%;
+  background: rgba(5, 5, 5, 0.55);
+  -webkit-backdrop-filter: blur(6px);
+  backdrop-filter: blur(6px);
+  color: #fff;
+  font-size: 1rem;
+  transition:
+    background 0.4s,
+    color 0.4s,
+    border-color 0.4s,
+    transform 0.5s var(--ease);
+}
+.wd-site--link:hover .wd-site__go,
+.wd-site--link:focus-visible .wd-site__go {
+  background: var(--chrome);
+  border-color: transparent;
+  color: #050505;
+  transform: rotate(-45deg);
+}
+
+.wd-site__meta {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 1rem;
+  margin-top: 0.95rem;
+}
+.wd-site__name {
+  font-family: var(--display);
+  font-size: 0.74rem;
+  font-weight: 800;
+  font-stretch: 125%;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+.wd-site__tag {
+  color: var(--muted);
+  font-family: var(--display);
+  font-size: 0.62rem;
+  font-weight: 600;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+}
+
+/* ---------- Footer: copyright only, bottom-left ---------- */
+.footer--slim {
+  padding: 1.25rem 0;
+}
+.footer--slim .footer__bottom {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  justify-content: flex-start;
+}
+
+/* ---------- Responsive ---------- */
+@media (max-width: 899.98px) {
+  .wd-hero__grid {
+    grid-template-columns: minmax(0, 1fr);
+    align-items: start;
+  }
+  .wd-rail {
+    --slide-w: min(88vw, 60rem);
+    --slide-w: min(88cqw, 60rem);
+  }
+}
+@media (max-width: 575.98px) {
+  .wd-head {
+    align-items: flex-start;
+  }
+  .wd-arrow {
+    width: 42px;
+    height: 42px;
+  }
+  .wd-site__go {
+    width: 40px;
+    height: 40px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .wd-reveal,
+  .wd-slide,
+  .wd-tile.wd-pop {
+    transition: none;
+    animation: none;
+  }
+}
+
+@media (hover: none) {
+  .wd-site__shot img {
+    filter: none;
+  }
+}

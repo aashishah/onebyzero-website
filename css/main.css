@@ -705,6 +705,42 @@ h3 {
   transform: rotate(-45deg);
 }
 
+/* ---------- ALL Header ---------- */
+.all__head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 1.1rem 2rem;
+  margin-top: 20px;
+}
+.all__title {
+  margin: 0 0 0.9rem;
+  font-size: clamp(1.15rem, 1.9vw, 1.6rem);
+  font-weight: 800;
+  font-stretch: 125%;
+  line-height: 1.1;
+  letter-spacing: -0.005em;
+  text-transform: uppercase;
+}
+.all__byline {
+  max-width: 40rem;
+  margin: 0;
+  color: rgba(255, 255, 255, 0.7);
+  font-family: var(--display);
+  font-size: 0.7rem;
+  font-weight: 600;
+  font-stretch: 110%;
+  line-height: 1.9;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+.all__cta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.7rem;
+}
+
 /* ---------- Wedding suite ---------- */
 .wedding {
   position: relative;
@@ -1281,6 +1317,12 @@ h3 {
   .contact-form .form-group.clearfix {
     flex-direction: column;
     gap: 1.35rem;
+  }
+  .all__cta {
+    width: 100%;
+  }
+  .all__cta .btn-obz {
+    flex: 1;
   }
   .accordion-body {
     padding-right: 0;
