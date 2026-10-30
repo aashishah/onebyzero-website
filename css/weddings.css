@@ -141,9 +141,24 @@
   container-type: inline-size; /* lets the rail size slides from its own width */
 }
 .wd-rail {
-  --slide-w: min(78vw, 60rem);
-  --slide-w: min(78cqw, 60rem);
-  --ratio: 16 / 9; /* change to 4 / 5 or 9 / 16 for portrait invites */
+  --ratio-w: 9; /* change these two together: 4 / 5 portrait, 9 / 16 tall, 16 / 9 landscape */
+  --ratio-h: 16;
+  --ratio: var(--ratio-w) / var(--ratio-h);
+
+  --max-h: calc(100svh - var(--nav-h) - 5rem);
+
+  --slide-w: min(
+    78vw,
+    60rem,
+    calc(var(--max-h) * var(--ratio-w) / var(--ratio-h))
+  );
+  --slide-w: min(
+    78cqw,
+    60rem,
+    calc(var(--max-h) * var(--ratio-w) / var(--ratio-h))
+  );
+
+  --edge: calc((100cqw - var(--slide-w)) / 2);
   --edge: calc((100cqw - var(--slide-w)) / 2);
   position: relative;
   display: flex;
