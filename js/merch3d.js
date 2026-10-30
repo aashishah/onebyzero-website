@@ -16,57 +16,60 @@ import {
   addTeeLights,
 } from "./tee3d.js";
 
-/* ===================== EDIT HERE ===================== */
-// One entry per tee.
-//   color:  shirt colour (any CSS colour)
-//   front / back: path to your artwork, relative to portfolio/merch.html (PNG with a transparent background looks best).
-//                 Leave as null to show an original placeholder design for now.
-//   printScale / printY: size and height of the front print (optional, default 0.5 / 0.2; y 0 = middle of the shirt, up is higher)
-//   backScale / backY:   same for the back print (optional, default 0.5 / 0.3)
-//   art: which placeholder design to draw while front is null (infinity | orb | wave | type | sun | grid)
-// Prices below are SAMPLE values – replace them with your real ones.
 const PRODUCTS = [
   {
-    name: "Infinity Tee",
-    color: "#0c0c10",
+    name: "Redbull - F1",
+    color: "#100e82",
     art: "infinity",
-    front: null,
-    back: null,
+    front: "../media/3d/RedbullFront.png",
+    back: "../media/3d/RedbullBack.png",
+    printScale: 2,
+    backScale: 1.5,
   },
   {
-    name: "Orbit Tee",
-    color: "#e8e4da",
+    name: "Mercedes - F1",
+    color: "#000000",
     art: "orb",
-    front: null,
-    back: null,
+    front: "../media/3d/MercFrontPrint.png",
+    back: "../media/3d/MercedesBackPNG.png",
+    printScale: 1.5,
+    backScale: 1.5,
   },
   {
-    name: "Signal Tee",
-    color: "#2b2d36",
+    name: "Slowbler",
+    color: "#134975",
+    art: "grid",
+    front: "../media/3d/BLUEFRONTPNG.png",
+    back: "../media/3d/BLUEBACKPNG.png",
+    printScale: 1.5,
+    backScale: 1.5,
+  },
+  {
+    name: "Kendrick Lamar",
+    color: "#000",
     art: "wave",
-    front: null,
-    back: null,
+    front: "../media/3d/LoyaltyFront.png",
+    back: "../media/3d/Loyaltybackprint.png",
+    printScale: 1.5,
+    backScale: 1.5,
   },
   {
-    name: "Zero Tee",
-    color: "#4a1020",
+    name: "Ferrari - F1",
+    color: "#c20000",
     art: "type",
-    front: null,
-    back: null,
+    front: "../media/3d/FERRARIFRONT.png",
+    back: "../media/3d/FERRARIBACK_FINAL.png",
+    printScale: 1.5,
+    backScale: 1.5,
   },
   {
     name: "Daybreak Tee",
-    color: "#101a3a",
+    color: "#301a1a",
     art: "sun",
-    front: null,
-    back: null,
-  },
-  {
-    name: "Grid Tee",
-    color: "#14231d",
-    art: "grid",
-    front: null,
-    back: null,
+    front: "../media/3d/BROWNFRONTPNG.png",
+    back: "../media/3d/BROWNBACKPNG.png",
+    printScale: 1.5,
+    backScale: 3,
   },
 ];
 
@@ -81,10 +84,10 @@ const CONFIG = {
   needHeight: 3.7, // world height that must fit in the carousel
   needWidth: 7.4, // world width that must fit (wide screens)
   needWidthNarrow: 4.4, // world width that must fit (phones)
-  focus: { y: 0.3, z: 0.9, scale: 1.0, duration: 1.15, autoSpin: 0.55 }, // spotlight view (autoSpin in rad/s)
+  focus: { y: 0.34, z: 0.9, scale: 1.1, duration: 1.15, autoSpin: 0.55 }, // spotlight view (autoSpin in rad/s)
   flipDuration: 0.8,
   modelUrl: "../media/3d/tshirt.glb",
-  textureSize: 2048, // print sharpness (smaller on phones)
+  textureSize: 2560, // print sharpness on desktop (phones use 1536). 3072 is sharper but uses a lot more memory
   lightIntensity: 3, // brightness of the spotlight
 };
 /* ====================================================== */
@@ -183,7 +186,7 @@ async function main() {
     ]);
     const prints = makePrints(item, frontImg, backImg, {
       aniso,
-      maxPx: small ? 1024 : CONFIG.textureSize,
+      maxPx: small ? 1536 : CONFIG.textureSize,
     });
     const tee = createTee(shirt, makeTeeMaterial(item, prints));
     tee.userData.i = i;
