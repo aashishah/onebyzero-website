@@ -601,8 +601,16 @@
     align-items: start;
   }
   .wd-rail {
-    --slide-w: min(88vw, 60rem);
-    --slide-w: min(88cqw, 60rem);
+    --slide-w: min(
+      88vw,
+      60rem,
+      calc(var(--max-h) * var(--ratio-w) / var(--ratio-h))
+    );
+    --slide-w: min(
+      88cqw,
+      60rem,
+      calc(var(--max-h) * var(--ratio-w) / var(--ratio-h))
+    );
   }
 }
 @media (max-width: 575.98px) {
